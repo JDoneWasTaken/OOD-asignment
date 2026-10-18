@@ -22,9 +22,11 @@ public class Main{
         ArrayList<User> userList = new ArrayList<>();
         ArrayList<User> eventList = new ArrayList<>();
 
-        Admin user1 = new Admin(1, "Joseph", "joseph@gmail.com", "12345678");
+        Admin user1 = new Admin(1, "Joseph", "12345678");
+        Attendee user2 = new Attendee(2, "Bennett", "87654321");
 
         userList.add(user1);
+        userList.add(user2);
 
         while (isRunning){
             System.out.println("=========================================");
@@ -77,4 +79,30 @@ public class Main{
             }
         }
     }
+
+    public static void signInPage(Scanner sc) {
+        String username = "empty";
+        String password = "empty";
+
+        while (signUpPage) {
+            System.out.println("=========================================");
+            System.out.println("Please enter the following information to create your account.");
+            System.out.println("=========================================");
+            System.out.println("username:  ");
+            username = sc.nextLine();
+
+        }
+    }
+
+    public static void logInPage(Scanner sc) {
+        while (logInPage) {
+
+        }
+        /*User u = new User();
+
+        String[] logInData = u.logIn();
+        System.out.println(logInData); */
+    }
+
+
 }

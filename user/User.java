@@ -5,19 +5,17 @@ import java.util.ArrayList;
 
 public class User{
     private int userID;
-    private String fullName;
-    private String email;
+    private String username;
     private String password;
 
-    public User(int userID, String fullName, String email, String password){
+    public User(int userID, String username, String password){
         this.userID = userID;
-        this.fullName = fullName;
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
     public User(){
-        this.email = "Unknown";
+        this.username = "Unknown";
     }
 
     public int getUserID() {
@@ -25,11 +23,7 @@ public class User{
     }
 
     public String getFullName() {
-        return this.fullName;
-    }
-
-    public String getEmail() {
-        return this.email;
+        return this.username;
     }
 
     public String getPassword(){
@@ -39,15 +33,15 @@ public class User{
     public String[] logIn(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Please enter your email:");
-        String inputEmail = sc.nextLine();
+        System.out.println("Please enter your username:");
+        String inputUsername = sc.nextLine();
 
         System.out.println("Please enter your password:");
         String inputPassword = sc.nextLine();
 
         sc.close();
 
-        String[] logInData = {inputEmail, inputPassword};
+        String[] logInData = {inputUsername, inputPassword};
         return logInData;
 
     }
