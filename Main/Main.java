@@ -39,18 +39,16 @@ public class Main{
             signUpPage(sc, userList);
 
             logInPage(sc, userList);
+
+            dashboardPage(sc);
             
-            isRunning = false;
+            //isRunning = false;
         }
         sc.close();
-        /*User u = new User();
-
-        String[] logInData = u.logIn();
-        System.out.println(logInData); */
     }
 
     public static void firstPage(Scanner sc) {
-        String firstOption = "0";
+        String firstOption = null;
             
             while (firstPage){
                 System.out.println("Please choose an option (1, 2 or 3):");
@@ -83,11 +81,11 @@ public class Main{
     }
 
     public static void signUpPage(Scanner sc, ArrayList<User> userList) {
-        String inputUsername = "empty";
+        String inputUsername = null;
         boolean usernameValid = false;
-        String inputPassword = "empty";
-        String inputRole = "empty";
-        String adminCode = "0";
+        String inputPassword = null;
+        String inputRole = null;
+        String adminCode = null;
 
         while (signUpPage) {
             System.out.println("=============================================================");
@@ -154,8 +152,8 @@ public class Main{
     }
 
     public static void logInPage(Scanner sc, ArrayList<User> userList) {
-        String inputUsername = "empty";
-        String inputPassword = "empty";
+        String inputUsername = null;
+        String inputPassword = null;
         boolean usernameValid = false;
         boolean passwordValid = false;
 
@@ -206,5 +204,62 @@ public class Main{
         }
     }
 
+    public static void dashboardPage(Scanner sc) {
+        String userInput = null;
+        while (loggedInUser != null){
+            loggedInUser.displayDashboard();
+            userInput = sc.nextLine();
 
+            if (loggedInUser instanceof Attendee) {
+                //This is an Attendee
+                /*Options for reference:
+                1. View Upcoming Schedule
+                2. Make Reservation
+                3. Review past booking
+                4. Log out
+                5. Quit system*/
+
+                if (userInput.equals("1")){
+                    System.out.println("(View Upcoming Schedule)");
+                } else if (userInput.equals("2")){
+                    System.out.println("(Make Reservation)");
+                } else if (userInput.equals("3")){
+                    System.out.println("(Review pass booking)");
+                } else if (userInput.equals("4")){  //log out user and back to first page.
+                    loggedInUser = null;
+                    firstPage = true;
+                } else if (userInput.equals("5")){  //log out user and stop the program.
+                    loggedInUser = null;
+                    isRunning = false;
+                } else {
+                    System.out.println("Please choose between 1-5 only.");
+                }
+
+            } else {
+                //This is an Admin
+                /*Options for reference:
+                1. Add event
+                2. Manage event
+                3. Upadate event
+                4. Log out
+                5. Quit system */
+
+                if (userInput.equals("1")){
+                    System.out.println("(Add event)");
+                } else if (userInput.equals("2")){
+                    System.out.println("(Manage event)");
+                } else if (userInput.equals("3")){
+                    System.out.println("(Update event)");
+                } else if (userInput.equals("4")){  //log out user and back to first page.
+                    loggedInUser = null;
+                    firstPage = true;
+                } else if (userInput.equals("5")){  //log out user and stop the program.
+                    loggedInUser = null;
+                    isRunning = false;
+                } else {
+                    System.out.println("Please choose between 1-5 only.");
+                }
+            }
+        }
+    }
 }
