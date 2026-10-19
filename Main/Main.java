@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import user.User;
 import user.Admin;
 import user.Attendee;
+import event.Event;
+import event.ConcertEvent;
+import event.ConferenceEvent;
 
 
 public class Main{
@@ -21,7 +24,7 @@ public class Main{
         Scanner sc = new Scanner(System.in);
 
         ArrayList<User> userList = new ArrayList<>();
-        //ArrayList<Event> eventList = new ArrayList<>();
+        ArrayList<Event> eventList = new ArrayList<>();
 
         Admin user1 = new Admin(1, "Joseph", "12345678");
         Attendee user2 = new Attendee(2, "Bennett", "87654321");
