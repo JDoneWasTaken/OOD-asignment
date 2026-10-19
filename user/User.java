@@ -1,8 +1,5 @@
 package user;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class User{
     private int userID;
     private String username;
@@ -22,7 +19,7 @@ public class User{
         return this.userID;
     }
 
-    public String getFullName() {
+    public String getUsername() {
         return this.username;
     }
 
@@ -30,19 +27,7 @@ public class User{
         return this.password;
     }
 
-    public String[] logIn(){
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Please enter your username:");
-        String inputUsername = sc.nextLine();
-
-        System.out.println("Please enter your password:");
-        String inputPassword = sc.nextLine();
-
-        sc.close();
-
-        String[] logInData = {inputUsername, inputPassword};
-        return logInData;
-
+    public void displayDashboard(){
+        System.out.println("(Dashboard placeholder)");
     }
 }
