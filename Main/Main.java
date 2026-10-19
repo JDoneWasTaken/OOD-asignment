@@ -186,7 +186,6 @@ public class Main{
                         }
                         passwordValid = true;
                         logInPage = false;
-                        //User(attendee/admin)page = true;
                     }
                 }
 
