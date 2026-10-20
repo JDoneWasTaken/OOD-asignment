@@ -2,13 +2,13 @@ package menu;
 
 import java.util.Scanner;
 
+
 import main.Main;
 import user.Admin;
 import user.Attendee;
 import user.User;
 
 public class userMenu {
-
     //1. First Page Method
     public static void firstPage(Scanner sc) {
         String firstOption = null;
