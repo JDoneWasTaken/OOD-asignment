@@ -4,8 +4,9 @@ public class Attendee extends User {
     int loyaltyPoint = 0;
 
 
-    public Attendee(int userID, String username, String password){
+    public Attendee(int userID, String username, String password, int loyaltyPoint){
         super(userID, username, password);
+        this.loyaltyPoint = loyaltyPoint;
     }
 
     @Override 

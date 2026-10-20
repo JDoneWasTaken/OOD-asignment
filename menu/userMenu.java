@@ -79,7 +79,7 @@ public class userMenu {
                 if (inputRole.equalsIgnoreCase("Attendee")) {
                     //create and reocrd a new attendee
                     int nextId = Main.userList.size() + 1;
-                    Attendee newAttendee = new Attendee(nextId, inputUsername, inputPassword);
+                    Attendee newAttendee = new Attendee(nextId, inputUsername, inputPassword, 0);
                     Main.userList.add(newAttendee);
 
                     System.out.println("Your attendee account is successfully created!");
