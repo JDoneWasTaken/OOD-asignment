@@ -1,11 +1,15 @@
 package menu;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import main.Main;
+import reservation.ticketReservation;
 import user.Attendee;
 import event.Event;
 import event.ConcertEvent;
@@ -47,7 +51,8 @@ public class userDashboard {
                     //System.out.println("(Browse Upcoming Schedule)");
                     veiwSchedule(sc);
                 } else if (userInput.equals("2")){
-                    System.out.println("(Review pass booking)");
+                    //System.out.println("(View pass reservation)");
+                    viewReservations(sc);
                 } else if (userInput.equals("3")){  //log out user and back to first page.
                     Main.loggedInUser = null;
                     Main.firstPage = true;
@@ -219,7 +224,7 @@ public class userDashboard {
             validInput = false;
 
             int nextId = Main.eventList.size() + 1;
-            ConcertEvent newEvent = new ConcertEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, artistName, vipSeats, vipPrice);
+            ConcertEvent newEvent = new ConcertEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, 0, artistName, vipSeats, 0,  vipPrice);
             Main.eventList.add(newEvent);
             newEvent.displayEventDetails();
 
@@ -229,7 +234,7 @@ public class userDashboard {
             speakerName = sc.nextLine();
 
             int nextId = Main.eventList.size() + 1;
-            ConferenceEvent newEvent = new ConferenceEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, speakerName);
+            ConferenceEvent newEvent = new ConferenceEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, 0,  speakerName);
             Main.eventList.add(newEvent);
             newEvent.displayEventDetails();
         }  
@@ -274,10 +279,10 @@ public class userDashboard {
             for (Event e: Main.eventList) {
                 if (e instanceof ConcertEvent) {
                     ConcertEvent concert = (ConcertEvent) e;
-                    System.out.println(numOfEvent + ") (Concert) Title: " + concert.getEventName() + " | Artist: " + concert.getArtistName() + " | Venue: " + concert.getVenue() + " | Seats left: Normal (" + (concert.getMaxCapacity()) + ") VIP (" + (concert.getVipSeats())   + ") | Price: Normal Ticket ~ " + concert.getBaseTicketPrice() + " VIP ticket ~ " + concert.getVipPrice());
+                    System.out.println(numOfEvent + ") (Concert) Title: " + concert.getEventName() + " | Artist: " + concert.getArtistName() + " | Venue: " + concert.getVenue() + " | Seats left: Normal (" + (concert.getMaxCapacity()-concert.getReservedSeats()) + ") VIP (" + (concert.getVipSeats()-concert.getReservedVipSeats())   + ") | Price: Normal Ticket ~ " + concert.getBaseTicketPrice() + " VIP ticket ~ " + concert.getVipPrice());
                 } else {
                     ConferenceEvent conference = (ConferenceEvent) e ;
-                    System.out.println(numOfEvent + ") (Conference) Title: " + conference.getEventName() + " |  " + conference.getSpeakerName() + " | Venue: " + conference.getVenue() + " | Seats left: " + conference.getMaxCapacity() + " | Ticket Price: " + conference.getBaseTicketPrice() );
+                    System.out.println(numOfEvent + ") (Conference) Title: " + conference.getEventName() + " | Speaker: " + conference.getSpeakerName() + " | Venue: " + conference.getVenue() + " | Seats left: " + (conference.getMaxCapacity()-conference.getReservedSeats()) + " | Ticket Price: " + conference.getBaseTicketPrice() );
                 }
                 numOfEvent += 1;
             }
@@ -287,11 +292,11 @@ public class userDashboard {
                 System.out.println("========================================================");
                 System.out.println("Choose an option (1/2/3)");
                 System.out.println("1. View an event details");
-                System.out.println("2. Reserver an event");
+                System.out.println("2. Reserve an event");
                 System.out.println("3. Back to menu");
                 userInput = sc.nextLine();
                 if (userInput.equalsIgnoreCase("1")) {
-                    System.out.println("Please enter the name of the event you want to view:");
+                    System.out.println("Please enter the title of the event you want to view:");
                     userInput = sc.nextLine();
                     for (Event e: Main.eventList){
                         if (e.getEventName().equalsIgnoreCase(userInput)){
@@ -301,12 +306,28 @@ public class userDashboard {
                             validInput = true;
                             break;
                         }
+                    }
                     if (eventSelected == null) {
                         System.out.println("Please enter a valid event name.");
                         }   
-                    }
+
                 } else if (userInput.equalsIgnoreCase("2")) {
-                    makeReservation(sc);
+                    userInput = "empty";
+                    eventSelected = null;
+                    System.out.println("Please enter the title of the event you want to reserve:");
+                    userInput = sc.nextLine();
+                    for (Event e: Main.eventList){
+                        if (e.getEventName().equalsIgnoreCase(userInput)){
+                            eventSelected = e;
+                            e.displayEventDetails();
+                            makeReservation(sc, eventSelected);
+                            validInput = true;
+                            break;
+                        }
+                    }
+                    if (eventSelected == null) {
+                        System.out.println("Please enter a valid event name.");
+                        }
                 } else if (userInput.equalsIgnoreCase("3")) {
                     validInput = true;
                     viewingSchedule = false;
@@ -319,24 +340,262 @@ public class userDashboard {
         }
     }
 
-    public static void makeReservation(Scanner sc) {
+    public static void makeReservation(Scanner sc, Event e) {
+        String userInput = null;
         boolean validInput = false;
-        String userInput = "empty";
-        Event eventSelected = null;
-        System.out.println("Please enter the name of the event you want to reserve:");
-            userInput = sc.nextLine();
-            for (Event e: Main.eventList){
-                if (e.getEventName().equalsIgnoreCase(userInput)){
-                    eventSelected = e;
-                    e.displayEventDetails();
+        String seatsReserved = null;
+        String bookingTime = null;
+        int ticketQuantity = 0;
+        double finalPrice = 0.00;
+        int normalSeats = 0;
+        int vipSeats = 0;
+        String normalSeatArrange = "";
+        String vipSeatArrange = "";
+        String finalSeatArrange = null;
 
-                    System.out.println("Please enter the amount you want to reserve." );
+        if (e instanceof ConcertEvent) {
+            ConcertEvent concert = (ConcertEvent) e;
+            System.out.println("Please enter the amount of Normal (" + e.getMaxCapacity() + " left) and VIP (" + concert.getVipSeats() + " left) seats you want to reserve." ); 
+            while (!validInput){
+                System.out.println("Normal: ");
+
+                if (sc.hasNextInt()){
+                    normalSeats = sc.nextInt();
+                    if (normalSeats > e.getMaxCapacity()){
+                        System.out.println("Only " + e.getMaxCapacity() + " Normal seats left, please enter again.");
+                    } else if (normalSeats < 0){
+                        System.out.println("Please enter a positive number");
+                    } else {
+                        validInput = true;
+                    }
+                } else {
+                    System.out.println("Please enter a valid number.");
+                    sc.next();
+                }
+                sc.nextLine();
+            }  
+            validInput = false;
+
+            while (!validInput){
+                System.out.println("VIP: ");
+
+                if (sc.hasNextInt()){
+                    vipSeats = sc.nextInt();
+                    if (vipSeats > concert.getVipSeats()){
+                        System.out.println("Only " + concert.getVipSeats() + " VIP seats left, please enter again.");
+                    } else if (vipSeats < 0){
+                        System.out.println("Please enter a positive number");
+                    } else {
+                        validInput = true;
+                    }
+                } else {
+                    System.out.println("Please enter a valid number.");
+                    sc.next();
+                }
+                sc.nextLine();
+            }  
+            validInput = false;
+
+            if (normalSeats != 0){
+                for (int t = e.getReservedSeats(); t < (concert.getReservedSeats()+normalSeats); t++ ){
+                    normalSeatArrange = normalSeatArrange + "ST-" + (t + 1) + ", ";
+                }
+            } else {
+                normalSeatArrange = "N/A";
+            }
+
+            if (vipSeats != 0){
+                for (int t = concert.getReservedVipSeats(); t < (concert.getReservedVipSeats()+vipSeats); t++ ){
+                    vipSeatArrange = vipSeatArrange + "VipST-" + (t + 1) + ", ";
+                }
+            } else {
+                vipSeatArrange = "N/A";
+            }
+
+            finalSeatArrange = "Normal = " + normalSeatArrange + " | VIP = " + vipSeatArrange;
+            ticketQuantity = normalSeats + vipSeats;
+            finalPrice = (concert.getBaseTicketPrice() * normalSeats) + (concert.getVipPrice() * vipSeats);
+
+            System.out.println("=============================================");
+            System.out.println("             Reservation Summary             ");
+            System.out.println("---------------------------------------------");
+            System.out.println("Event name: " + e.getEventName());
+            System.out.println("Reserved by: " + Main.loggedInUser.getUsername());
+            System.out.println("Reserved Seats: " + finalSeatArrange);
+            System.out.println("Ticket quantity: " + ticketQuantity);
+            System.out.println("---------------------------------------------");
+            System.out.println("Final Price: RM" + finalPrice);
+            System.out.println("=============================================");
+
+            while (!validInput) {
+                System.out.print("Confirm reservation? (y/n)");
+                userInput = sc.nextLine();
+
+                if (userInput.equalsIgnoreCase("y")) {
+                    while (!validInput) {
+                        System.out.println("Please choose a payment method (1/2/3/4):");
+                        System.out.println("1. Credit/Debit card");
+                        System.out.println("2. E-wallet (TNG,APPLEPAY,..and more");
+                        System.out.println("3. Online Banking");
+                        System.out.println("4. Cancel (Discard the reservation)");
+                        userInput = sc.nextLine();
+                        if (userInput.equals("1") || userInput.equals("2") || userInput.equals("3")) {
+                            LocalDateTime now = LocalDateTime.now();
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            bookingTime = now.format(formatter);
+
+                            concert.setReservedSeats(concert.getReservedSeats()+normalSeats);
+                            concert.setReservedVipSeats(concert.getReservedVipSeats()+vipSeats);
+
+                            int nextId = Main.reservationList.size() + 1;
+                            ticketReservation newReservation = new ticketReservation(nextId, Main.loggedInUser, e, finalSeatArrange, ticketQuantity, bookingTime, finalPrice);
+
+                            Main.reservationList.add(newReservation);
+                            System.out.println("Thank you for the payment!");
+                            System.out.println("Reservation created successfully.");
+                            pressEnterToContinue(sc);
+                            validInput = true;
+                        } else if (userInput.equals("4")) {
+                            System.out.println("Reservation cancelled.");
+                            pressEnterToContinue(sc);
+                            validInput = true;
+                        } else {
+                            System.out.println("Please choose between 1-4 only.");
+                            pressEnterToContinue(sc);
+                            System.out.println("=======================================");
+                        }
+                    }
+
+                } else if (userInput.equalsIgnoreCase("n")) {
+                    System.out.println("Reservation cancelled.");
+                    pressEnterToContinue(sc);
                     validInput = true;
-                    break;
+                } else {
+                    System.out.println("Please enter Y or N only.");
                 }
-            if (eventSelected == null) {
-                System.out.println("Please enter a valid event name.");
+            }
+
+        } else {
+            ConferenceEvent conference = (ConferenceEvent) e;
+            System.out.println("Please enter the amount of Normal (" + e.getMaxCapacity() + " left) seats you want to reserve." ); 
+            while (!validInput){
+                System.out.println("Normal: ");
+
+                if (sc.hasNextInt()){
+                    normalSeats = sc.nextInt();
+                    if (normalSeats > e.getMaxCapacity()){
+                        System.out.println("Only " + e.getMaxCapacity() + " Normal seats left, please enter again.");
+                    } else if (normalSeats < 0){
+                        System.out.println("Please enter a positive number");
+                    } else {
+                        validInput = true;
+                    }
+                } else {
+                    System.out.println("Please enter a valid number.");
+                    sc.next();
                 }
-            }          
+                sc.nextLine();
+            }  
+            validInput = false;
+
+            if (normalSeats != 0){
+                for (int t = e.getReservedSeats(); t < (conference.getReservedSeats()+normalSeats); t++ ){
+                    normalSeatArrange = normalSeatArrange + "ST-" + (t + 1) + ", ";
+                }
+            } else {
+                normalSeatArrange = "N/A";
+            }
+
+            finalSeatArrange = "Normal = " + normalSeatArrange;
+            ticketQuantity = normalSeats;
+            finalPrice = conference.getBaseTicketPrice() * normalSeats;
+
+            System.out.println("=============================================");
+            System.out.println("             Reservation Summary             ");
+            System.out.println("---------------------------------------------");
+            System.out.println("Event name: " + e.getEventName());
+            System.out.println("Reserved by: " + Main.loggedInUser.getUsername());
+            System.out.println("Reserved Seats: " + finalSeatArrange);
+            System.out.println("Ticket quantity: " + ticketQuantity);
+            System.out.println("---------------------------------------------");
+            System.out.println("Final Price: RM" + finalPrice);
+            System.out.println("=============================================");
+
+            while (!validInput) {
+                System.out.print("Confirm reservation? (y/n)");
+                userInput = sc.nextLine();
+
+                if (userInput.equalsIgnoreCase("y")) {
+                    while (!validInput) {
+                        System.out.println("Please choose a payment method (1/2/3/4):");
+                        System.out.println("1. Credit/Debit card");
+                        System.out.println("2. E-wallet (TNG,APPLEPAY,..and more");
+                        System.out.println("3. Online Banking");
+                        System.out.println("4. Cancel (Discard the reservation)");
+                        userInput = sc.nextLine();
+                        if (userInput.equals("1") || userInput.equals("2") || userInput.equals("3")) {
+
+                            LocalDateTime now = LocalDateTime.now();
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            bookingTime = now.format(formatter);
+
+                            conference.setReservedSeats(conference.getReservedSeats()+normalSeats);
+
+                            int nextId = Main.reservationList.size() + 1;
+                            ticketReservation newReservation = new ticketReservation(nextId, Main.loggedInUser, e, finalSeatArrange, ticketQuantity, bookingTime, finalPrice);
+
+                            Main.reservationList.add(newReservation);
+                            System.out.println("Thank you for the payment!");
+                            System.out.println("Reservation created successfully.");
+                            pressEnterToContinue(sc);
+                            validInput = true;
+                        } else if (userInput.equals("4")) {
+                            System.out.println("Reservation cancelled.");
+                            pressEnterToContinue(sc);
+                            validInput = true;
+                        } else {
+                            System.out.println("Please choose between 1-4 only.");
+                            pressEnterToContinue(sc);
+                            System.out.println("=======================================");
+                        }
+                    }
+
+                } else if (userInput.equalsIgnoreCase("n")) {
+                    System.out.println("Reservation cancelled.");
+                    pressEnterToContinue(sc);
+                    validInput = true;
+                } else {
+                    System.out.println("Please enter Y or N only.");
+                }
+            }
+
+        }  
     }   
+
+    public static void viewReservations(Scanner sc) {
+        boolean hasReservation = false;
+        int index = 1;
+        System.out.println("===========================================");
+        System.out.println("            EVENT RESERVATIONS             ");
+        System.out.println("===========================================");
+        ArrayList<ticketReservation> myReservations = new ArrayList<>();
+
+        for (ticketReservation r: Main.reservationList) {
+            if (r.getAttendee().equals(Main.loggedInUser)) {
+                myReservations.add(r);
+                System.out.println("              ~ Event " + index + " ~           ");
+                r.displayReservation();
+                hasReservation = true;
+                index ++;
+            }
+        }
+
+
+        if (!hasReservation) {
+            System.out.println("You haven't make any reservation.");
+            pressEnterToContinue(sc);
+        } else {
+            pressEnterToContinue(sc);
+        }
+    }
 }
