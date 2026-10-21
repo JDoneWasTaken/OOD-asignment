@@ -7,10 +7,15 @@ import java.util.Scanner;
 
 import main.Main;
 import user.Attendee;
+import event.Event;
 import event.ConcertEvent;
 import event.ConferenceEvent;
 
 public class userDashboard {
+    public static void pressEnterToContinue(Scanner sc) {
+        System.out.println("\nPress enter to continue...");
+        sc.nextLine();
+    }
 
     public static boolean checkDate(String dateInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -39,19 +44,18 @@ public class userDashboard {
                 5. Quit system*/
 
                 if (userInput.equals("1")){
-                    System.out.println("(View Upcoming Schedule)");
+                    //System.out.println("(Browse Upcoming Schedule)");
+                    veiwSchedule(sc);
                 } else if (userInput.equals("2")){
-                    System.out.println("(Make Reservation)");
-                } else if (userInput.equals("3")){
                     System.out.println("(Review pass booking)");
-                } else if (userInput.equals("4")){  //log out user and back to first page.
+                } else if (userInput.equals("3")){  //log out user and back to first page.
                     Main.loggedInUser = null;
                     Main.firstPage = true;
-                } else if (userInput.equals("5")){  //log out user and stop the program.
+                } else if (userInput.equals("4")){  //log out user and stop the program.
                     Main.loggedInUser = null;
                     Main.isRunning = false;
                 } else {
-                    System.out.println("Please choose between 1-5 only.");
+                    System.out.println("Please choose between 1-4 only.");
                 }
 
             } else {
@@ -93,9 +97,8 @@ public class userDashboard {
         int maxCapacity = 0;
         String speakerName = null;
         String artistName = null;
-        int percentageChange = 0;
-        double vipSeatPercentage = 0;
-        double vipPriceMultiplier = 0;
+        int vipSeats = 0;
+        double vipPrice = 0;
         boolean validInput = false;
     
         while (!validInput){
@@ -151,12 +154,11 @@ public class userDashboard {
         validInput = false;
 
         while (!validInput){
-            System.out.println("Please enter the max capacity (seats)");
+            System.out.println("Please enter the amount of Normal Seats:");
 
             if (sc.hasNextInt()){
                 maxCapacity = sc.nextInt();
                 if (maxCapacity > 10){
-                    System.out.println("Max Capacity = " + maxCapacity);
                     validInput = true;
                 } else {
                     System.out.println("Please enter at least 10 seats.");
@@ -176,23 +178,21 @@ public class userDashboard {
             artistName = sc.nextLine();
 
             while (!validInput){
-                System.out.println("Please enter the percentage of VIP seats:");
+                System.out.println("Please enter the amount of VIP seats:");
 
                 if (sc.hasNextInt()){
-                    percentageChange = sc.nextInt();
-                    System.out.println(percentageChange);
-                    vipSeatPercentage = percentageChange/100.0;
-                    System.out.println(vipSeatPercentage);
-                    if ((vipSeatPercentage > 0) && (vipSeatPercentage < 100)){
+                    vipSeats = sc.nextInt();
+                    System.out.println(vipSeats);
+                    if ((vipSeats > 0) && (vipSeats < maxCapacity)){
                         
-                        System.out.println("VIP seats = " + (maxCapacity*vipSeatPercentage));
-                        System.out.println("Normal seats = " + (maxCapacity*(1-vipSeatPercentage)));
+                        System.out.println("VIP seats = " + (vipSeats));
+                        System.out.println("Normal seats = " + (maxCapacity));
                         validInput = true;
                     } else {
-                        System.out.println("Please enter a number between 1-99 only.");
+                        System.out.println("VIP seats cannot be 0 or more than normal seats.");
                     }
                 } else {
-                    System.out.println("Please enter a number between 1-99 only.");
+                    System.out.println("Please enter a valid number.");
                     sc.next();
                 }
                 sc.nextLine();
@@ -200,17 +200,15 @@ public class userDashboard {
             validInput = false;
 
             while (!validInput){
-                System.out.println("Please enter the VIP ticket price multiplier:");
+                System.out.println("Please enter the VIP ticket price:");
 
-                if (sc.hasNextInt()){
-                    percentageChange = sc.nextInt();
-                    vipPriceMultiplier = percentageChange/100.0;
-                    System.out.println(vipPriceMultiplier);
-                    if (vipPriceMultiplier >= 1) {
-                        System.out.println("VIP ticket price = RM" + (baseTicketPrice*vipPriceMultiplier));
+                if (sc.hasNextDouble()){
+                    vipPrice = sc.nextDouble();
+                    if (vipPrice > baseTicketPrice) {
+                        System.out.println("VIP ticket price = RM" + (vipPrice));
                         validInput = true;
                     } else {
-                        System.out.println("Please enter a valid number higher than 100 only.");
+                        System.out.println("VIP ticket price must be higher than base ticket price");
                     }
                 } else {
                     System.out.println("Please enter a valid number.");
@@ -221,7 +219,7 @@ public class userDashboard {
             validInput = false;
 
             int nextId = Main.eventList.size() + 1;
-            ConcertEvent newEvent = new ConcertEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, artistName, vipSeatPercentage, vipPriceMultiplier);
+            ConcertEvent newEvent = new ConcertEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, artistName, vipSeats, vipPrice);
             Main.eventList.add(newEvent);
             newEvent.displayEventDetails();
 
@@ -260,7 +258,85 @@ public class userDashboard {
 
     public static void manageEvent(Scanner sc) {
         boolean validInput = false;
-
-        
     }
+
+    public static void veiwSchedule(Scanner sc) {
+        boolean viewingSchedule = true;
+        String userInput = "empty";
+        boolean validInput = false;
+        Event eventSelected = null;
+
+        while (viewingSchedule) {
+            System.out.println("========================================================");
+            System.out.println("                  Upcoming Events");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            int numOfEvent = 1;
+            for (Event e: Main.eventList) {
+                if (e instanceof ConcertEvent) {
+                    ConcertEvent concert = (ConcertEvent) e;
+                    System.out.println(numOfEvent + ") (Concert) Title: " + concert.getEventName() + " | Artist: " + concert.getArtistName() + " | Venue: " + concert.getVenue() + " | Seats left: Normal (" + (concert.getMaxCapacity()) + ") VIP (" + (concert.getVipSeats())   + ") | Price: Normal Ticket ~ " + concert.getBaseTicketPrice() + " VIP ticket ~ " + concert.getVipPrice());
+                } else {
+                    ConferenceEvent conference = (ConferenceEvent) e ;
+                    System.out.println(numOfEvent + ") (Conference) Title: " + conference.getEventName() + " |  " + conference.getSpeakerName() + " | Venue: " + conference.getVenue() + " | Seats left: " + conference.getMaxCapacity() + " | Ticket Price: " + conference.getBaseTicketPrice() );
+                }
+                numOfEvent += 1;
+            }
+        
+
+            while (!validInput) {
+                System.out.println("========================================================");
+                System.out.println("Choose an option (1/2/3)");
+                System.out.println("1. View an event details");
+                System.out.println("2. Reserver an event");
+                System.out.println("3. Back to menu");
+                userInput = sc.nextLine();
+                if (userInput.equalsIgnoreCase("1")) {
+                    System.out.println("Please enter the name of the event you want to view:");
+                    userInput = sc.nextLine();
+                    for (Event e: Main.eventList){
+                        if (e.getEventName().equalsIgnoreCase(userInput)){
+                            eventSelected = e;
+                            e.displayEventDetails();
+                            pressEnterToContinue(sc);
+                            validInput = true;
+                            break;
+                        }
+                    if (eventSelected == null) {
+                        System.out.println("Please enter a valid event name.");
+                        }   
+                    }
+                } else if (userInput.equalsIgnoreCase("2")) {
+                    makeReservation(sc);
+                } else if (userInput.equalsIgnoreCase("3")) {
+                    validInput = true;
+                    viewingSchedule = false;
+                } else {
+                    System.out.println("Please enter a valid option.");
+                }
+            }
+
+            validInput = false;
+        }
+    }
+
+    public static void makeReservation(Scanner sc) {
+        boolean validInput = false;
+        String userInput = "empty";
+        Event eventSelected = null;
+        System.out.println("Please enter the name of the event you want to reserve:");
+            userInput = sc.nextLine();
+            for (Event e: Main.eventList){
+                if (e.getEventName().equalsIgnoreCase(userInput)){
+                    eventSelected = e;
+                    e.displayEventDetails();
+
+                    System.out.println("Please enter the amount you want to reserve." );
+                    validInput = true;
+                    break;
+                }
+            if (eventSelected == null) {
+                System.out.println("Please enter a valid event name.");
+                }
+            }          
+    }   
 }
