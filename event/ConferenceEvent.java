@@ -12,6 +12,10 @@ public class ConferenceEvent extends Event{
         return this.speakerName;
     }
 
+    public void setSpeakerName(String speakerName) {
+        this.speakerName = speakerName;
+    }
+
     @Override 
     public void displayEventDetails() {
         System.out.println("========================================");

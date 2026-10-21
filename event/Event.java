@@ -22,9 +22,14 @@ public abstract class Event {
     public int getEventID() {
         return this.eventID;
     }
+    
 
     public String getEventName() {
         return this.eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getEventDate(){
@@ -33,6 +38,10 @@ public abstract class Event {
 
     public String getVenue() {
         return this.venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public double getBaseTicketPrice() {

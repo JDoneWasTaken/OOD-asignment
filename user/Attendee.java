@@ -9,6 +9,14 @@ public class Attendee extends User {
         this.loyaltyPoint = loyaltyPoint;
     }
 
+    public int getLoyaltyPoint() {
+        return this.loyaltyPoint;
+    }
+
+    public void setLoyaltyPoint(int loyaltyPoint) {
+        this.loyaltyPoint = loyaltyPoint;
+    }
+
     @Override 
     public void displayDashboard(){
         System.out.println("===========================================");
@@ -17,8 +25,9 @@ public class Attendee extends User {
         System.out.println("Please choose an option below (1/2/3/4):");
         System.out.println("1. View Upcoming Schedule");
         System.out.println("2. Review past booking");
-        System.out.println("3. Log out");
-        System.out.println("4. Quit system");
+        System.out.println("3. View digital tickets");
+        System.out.println("4. Log out");
+        System.out.println("5. Quit system");
         System.out.println("===========================================");
 
 

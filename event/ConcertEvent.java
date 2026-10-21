@@ -18,6 +18,10 @@ public class ConcertEvent extends Event{
         return this.artistName;
     }
 
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
     public int getVipSeats(){
         return this.vipSeats;
     }
@@ -40,7 +44,7 @@ public class ConcertEvent extends Event{
         System.out.println("               ~ Concert Event ~               ");
         System.out.println("-----------------------------------------------");
         System.out.println("Event name: " + getEventName());
-        System.out.println("Artist :" + artistName);
+        System.out.println("Artist: " + artistName);
         System.out.println("Date: " + getEventDate());
         System.out.println("Venue: " + getVenue());
         System.out.println("Total seats: Normal = " + (getMaxCapacity()) + " (" + (getMaxCapacity()-getReservedSeats()) + " left) | VIP = " + (getVipSeats()) + " (" + (getVipSeats()-getReservedVipSeats()) + " left)");

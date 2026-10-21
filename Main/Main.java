@@ -10,6 +10,7 @@ import event.ConcertEvent;
 import event.ConferenceEvent;
 import menu.userMenu;
 import menu.userDashboard;
+import reservation.digitalTicket;
 import reservation.ticketReservation;
 
 
@@ -24,6 +25,7 @@ public class Main{
     public static ArrayList<User> userList = new ArrayList<>();
     public static ArrayList<Event> eventList = new ArrayList<>();
     public static ArrayList<ticketReservation> reservationList = new ArrayList<>();
+    public static ArrayList<digitalTicket> digitalTicketList = new ArrayList<>();
 
 
     public static void main(String[] args){
