@@ -7,12 +7,12 @@ public class ticketReservation{
     private int reservationID;
     private User attendee;
     private Event bookedEvent;
-    private String[] seatNumber;
+    private String seatNumber;
     private int ticketQuantity;
     private String bookingTime;
     private double finalPrice;
 
-    public ticketReservation (int reservationID, User attendee, Event bookedEvent, String[] seatNumber, int ticketQuantity, String bookingTime, double finalPrice) {
+    public ticketReservation (int reservationID, User attendee, Event bookedEvent, String seatNumber, int ticketQuantity, String bookingTime, double finalPrice) {
         this.reservationID = reservationID;
         this.attendee = attendee;
         this.bookedEvent = bookedEvent;
@@ -34,7 +34,7 @@ public class ticketReservation{
         return this.bookedEvent;
     }
 
-    public String[] getSeatNumber() {
+    public String getSeatNumber() {
         return this.seatNumber;
     }
 
@@ -51,17 +51,15 @@ public class ticketReservation{
     }
 
     public void displayReservation() {
-        System.out.println("=========================================");
-        System.out.println("           Event Reservation             ");
-        System.out.println("-----------------------------------------");
+        System.out.println("-------------------------------------------");
         System.out.println("Event name: " + bookedEvent.getEventName());
         System.out.println("Reserved by: " + attendee.getUsername());
-        System.out.println("Seat no: " + getSeatNumber());
-        System.out.println("Booking time - " + getBookingTime());
+        System.out.println("Reserved Seats: " + getSeatNumber());
+        System.out.println("Booking time : " + getBookingTime());
         System.out.println("Ticket quantity: " + getTicketQuantity());
-        System.out.println("-----------------------------------------");
-        System.out.println("Final Price: " + (getFinalPrice()));
-        System.out.println("=========================================");
+        System.out.println("------------------------------------------");
+        System.out.println("Final Price: RM" + (getFinalPrice()));
+        System.out.println("===========================================");
     }
 
 }
