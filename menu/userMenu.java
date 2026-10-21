@@ -39,6 +39,7 @@ public class userMenu {
                } else {
                     System.out.println("Please enter a valid option (1/2/3).");
                     System.out.println("=========================================");
+                    userDashboard.pressEnterToContinue(sc);
             }
         }
     }
@@ -65,6 +66,7 @@ public class userMenu {
                     if (u.getUsername().equalsIgnoreCase(inputUsername)) {
                         System.out.println("Username is used, please try a different username");
                         System.out.println("=================================================");
+                        userDashboard.pressEnterToContinue(sc);
                         usernameValid = false;
                     }
                 }
@@ -155,12 +157,14 @@ public class userMenu {
 
                 if (!passwordValid) {
                     System.out.println("Wrong password. Please try again.");
+                    userDashboard.pressEnterToContinue(sc);
                     Main.logInPage = false;
                     Main.firstPage = true;
                 }
 
             } else {
                 System.out.println("This username does not exist, please try again.");
+                userDashboard.pressEnterToContinue(sc);
                 Main.logInPage = false;
                 Main.firstPage = true;
             }

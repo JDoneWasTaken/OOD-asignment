@@ -7,14 +7,16 @@ public abstract class Event {
     private String eventDate;
     private double baseTicketPrice;
     private int maxCapacity;
+    private int reservedSeats;
 
-    public Event (int eventID, String eventName, String eventDate, String venue, double baseTicketPrice, int maxCapacity) {
+    public Event (int eventID, String eventName, String eventDate, String venue, double baseTicketPrice, int maxCapacity, int reservedSeats) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.venue = venue;
         this.baseTicketPrice = baseTicketPrice;
         this.maxCapacity = maxCapacity;
+        this.reservedSeats = reservedSeats;
     }
 
     public int getEventID() {
@@ -39,6 +41,14 @@ public abstract class Event {
 
     public int getMaxCapacity() {
         return this.maxCapacity;
+    }
+
+    public int getReservedSeats() {
+        return this.reservedSeats;
+    }
+
+    public void setReservedSeats(int reservedSeats) {
+        this.reservedSeats = reservedSeats;
     }
 
     public abstract void displayEventDetails();

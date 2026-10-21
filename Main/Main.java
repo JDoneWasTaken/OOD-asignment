@@ -10,6 +10,7 @@ import event.ConcertEvent;
 import event.ConferenceEvent;
 import menu.userMenu;
 import menu.userDashboard;
+import reservation.ticketReservation;
 
 
 public class Main{
@@ -22,6 +23,7 @@ public class Main{
     public static User loggedInUser = null;
     public static ArrayList<User> userList = new ArrayList<>();
     public static ArrayList<Event> eventList = new ArrayList<>();
+    public static ArrayList<ticketReservation> reservationList = new ArrayList<>();
 
 
     public static void main(String[] args){
@@ -30,8 +32,8 @@ public class Main{
         Admin user1 = new Admin(1, "Joseph", "123");
         Attendee user2 = new Attendee(2, "Bennett", "321", 0);
 
-        ConcertEvent event1 = new ConcertEvent(1, "first event", "2026-10-30", "mckl", 200, 300, "Jason", 30, 400);
-        ConferenceEvent event2 = new ConferenceEvent(2, "second event","2026-11-01", "MCKL", 10, 20, "Galvin");
+        ConcertEvent event1 = new ConcertEvent(1, "first event", "2026-10-30", "mckl", 200, 300, 0, "Jason", 30, 0,  400);
+        ConferenceEvent event2 = new ConferenceEvent(2, "second event","2026-11-01", "MCKL", 10, 20, 0, "Galvin");
 
         userList.add(user1);
         userList.add(user2);

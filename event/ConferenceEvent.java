@@ -3,8 +3,8 @@ package event;
 public class ConferenceEvent extends Event{
     private String speakerName;
 
-    public ConferenceEvent (int eventID, String eventName,String eventDate, String venue, double baseTicketPrice, int maxCapacity, String speakerName) {
-        super(eventID, eventName, eventDate, venue, baseTicketPrice, maxCapacity);
+    public ConferenceEvent (int eventID, String eventName,String eventDate, String venue, double baseTicketPrice, int maxCapacity, int reservedSeats, String speakerName) {
+        super(eventID, eventName, eventDate, venue, baseTicketPrice, maxCapacity, reservedSeats);
         this.speakerName = speakerName;
     }
 
@@ -21,7 +21,7 @@ public class ConferenceEvent extends Event{
         System.out.println("Speaker :" + speakerName);
         System.out.println("Date: " + getEventDate());
         System.out.println("Venue: " + getVenue());
-        System.out.println("Total seats left: " + getMaxCapacity());
+        System.out.println("Total seats " + getMaxCapacity() + " (" + (getMaxCapacity()-getReservedSeats()) + " left)");
         System.out.println("Ticket Price: RM" + getBaseTicketPrice());
         System.out.println("========================================");
     }
