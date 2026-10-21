@@ -19,11 +19,13 @@ public class userDashboard {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
-            LocalDate.parse(dateInput, formatter);
-            return true;
+            LocalDate parsedDate = LocalDate.parse(dateInput, formatter);
+            return parsedDate.isAfter(LocalDate.now());
+            
         } catch (DateTimeParseException e) {
             return false;
         }
+
     }
 
     public static void dashboardPage(Scanner sc) {

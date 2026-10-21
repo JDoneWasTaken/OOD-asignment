@@ -45,7 +45,7 @@ public class eventManager {
                 validInput = true;
                 break;
             } else {
-                System.out.println("Invalid date. Pleaser enter a valid date (yyyy-mm-dd)");
+                System.out.println("Invalid date. Pleaser enter a valid date after today (yyyy-mm-dd).");
             }
         }
         validInput = false;
@@ -156,7 +156,7 @@ public class eventManager {
 
         while (!validInput){
             System.out.println("===============================================================");
-            System.out.println("Please 'Confirm' or 'Discard' the creation of the new event.");
+            System.out.println("Please choose 'Confirm' or 'Discard' the creation of the new event.");
             String eventCreate = sc.nextLine();
 
             if (eventCreate.equalsIgnoreCase("confirm")){
