@@ -27,10 +27,10 @@ public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
-        Admin user1 = new Admin(1, "Joseph", "12345678");
-        Attendee user2 = new Attendee(2, "Bennett", "87654321", 0);
+        Admin user1 = new Admin(1, "Joseph", "123");
+        Attendee user2 = new Attendee(2, "Bennett", "321", 0);
 
-        ConcertEvent event1 = new ConcertEvent(1, "first event", "2026-10-30", "mckl", 200, 300, "Jason", 0.4, 1.4);
+        ConcertEvent event1 = new ConcertEvent(1, "first event", "2026-10-30", "mckl", 200, 300, "Jason", 30, 400);
         ConferenceEvent event2 = new ConferenceEvent(2, "second event","2026-11-01", "MCKL", 10, 20, "Galvin");
 
         userList.add(user1);

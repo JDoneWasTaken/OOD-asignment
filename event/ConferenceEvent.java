@@ -16,12 +16,13 @@ public class ConferenceEvent extends Event{
     public void displayEventDetails() {
         System.out.println("========================================");
         System.out.println("         ~ Conference Event ~           ");
-        System.out.println("========================================");
+        System.out.println("----------------------------------------");
         System.out.println("Event name: " + getEventName());
         System.out.println("Speaker :" + speakerName);
         System.out.println("Date: " + getEventDate());
         System.out.println("Venue: " + getVenue());
         System.out.println("Total seats left: " + getMaxCapacity());
         System.out.println("Ticket Price: RM" + getBaseTicketPrice());
+        System.out.println("========================================");
     }
  }   

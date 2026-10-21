@@ -14,7 +14,7 @@ public class userMenu {
         String firstOption = null;
             
             while (Main.firstPage){
-                System.out.println("Please choose an option (1, 2 or 3):");
+                System.out.println("Please choose an option (1/2/3):");
                 System.out.println("1. Log In");
                 System.out.println("2. Sign Up (if you don't have an account yet)");
                 System.out.println("3. Quit System.");
@@ -37,7 +37,7 @@ public class userMenu {
                     Main.isRunning = false;
 
                } else {
-                    System.out.println("Please enter a valid option (1, 2 or 3).");
+                    System.out.println("Please enter a valid option (1/2/3).");
                     System.out.println("=========================================");
             }
         }
