@@ -9,11 +9,16 @@ import user.Attendee;
 import user.User;
 
 public class userMenu {
+    public static boolean firstPage = true;
+    public static boolean signUpPage = false;
+    public static boolean logInPage = false;
+    public static boolean attendeePage = false;
+    public static boolean adminPage = false;
     //1. First Page Method
     public static void firstPage(Scanner sc) {
         String firstOption = null;
             
-            while (Main.firstPage){
+            while (firstPage){
                 System.out.println("Please choose an option (1/2/3):");
                 System.out.println("1. Log In");
                 System.out.println("2. Sign Up (if you don't have an account yet)");
@@ -22,18 +27,18 @@ public class userMenu {
 
                if (firstOption.equals("1")){
                     System.out.println(firstOption);
-                    Main.firstPage = false;
-                    Main.logInPage = true;
+                    firstPage = false;
+                    logInPage = true;
 
                } else if (firstOption.equals("2")) {
                     System.out.println(firstOption);
-                    Main.firstPage = false;
-                    Main.signUpPage = true;
+                    firstPage = false;
+                    signUpPage = true;
 
                } else if (firstOption.equals("3")) {
                     System.out.println(firstOption);
                     System.out.println("=========================================");
-                    Main.firstPage = false;
+                    firstPage = false;
                     Main.isRunning = false;
 
                } else {
@@ -52,7 +57,7 @@ public class userMenu {
         String inputRole = null;
         String adminCode = null;
 
-        while (Main.signUpPage) {
+        while (signUpPage) {
             System.out.println("=============================================================");
             System.out.println("Please enter the following information to create your account.");
             System.out.println("==============================================================");
@@ -86,8 +91,8 @@ public class userMenu {
 
                     System.out.println("Your attendee account is successfully created!");
                     System.out.println("==============================================");
-                    Main.signUpPage = false;
-                    Main.firstPage = true;
+                    signUpPage = false;
+                    firstPage = true;
                     break;
                 } else if (inputRole.equalsIgnoreCase("Admin")){
                     System.out.println("Please enter your admin code:");
@@ -100,8 +105,8 @@ public class userMenu {
                         Admin newAdmin = new Admin(nextId, inputUsername, inputPassword);
                         Main.userList.add(newAdmin);
 
-                        Main.signUpPage = false;
-                        Main.firstPage = true;
+                        signUpPage = false;
+                        firstPage = true;
                         break;
                     } else {
                         System.out.println("Invalid admin code.");
@@ -123,7 +128,7 @@ public class userMenu {
         boolean usernameValid = false;
         boolean passwordValid = false;
 
-        while (Main.logInPage) {
+        while (logInPage) {
             System.out.println("================================================================");
             System.out.println("Please enter the following information to log into your account.");
             System.out.println("================================================================");
@@ -151,22 +156,22 @@ public class userMenu {
                             System.out.println("Logged in as Admin!");
                         }
                         passwordValid = true;
-                        Main.logInPage = false;
+                        logInPage = false;
                     }
                 }
 
                 if (!passwordValid) {
                     System.out.println("Wrong password. Please try again.");
                     userDashboard.pressEnterToContinue(sc);
-                    Main.logInPage = false;
-                    Main.firstPage = true;
+                    logInPage = false;
+                    firstPage = true;
                 }
 
             } else {
                 System.out.println("This username does not exist, please try again.");
                 userDashboard.pressEnterToContinue(sc);
-                Main.logInPage = false;
-                Main.firstPage = true;
+                logInPage = false;
+                firstPage = true;
             }
         }
     }

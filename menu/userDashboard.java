@@ -53,7 +53,7 @@ public class userDashboard {
                     viewReservations.displayTickets(sc);
                 } else if (userInput.equals("4")){  //log out user and back to first page.
                     Main.loggedInUser = null;
-                    Main.firstPage = true;
+                    userMenu.firstPage = true;
                 } else if (userInput.equals("5")){  //log out user and stop the program.
                     Main.loggedInUser = null;
                     Main.isRunning = false;
@@ -78,7 +78,7 @@ public class userDashboard {
                     eventManager.manageEvent(sc);
                 } else if (userInput.equals("3")){  //log out user and back to first page.
                     Main.loggedInUser = null;
-                    Main.firstPage = true;
+                    userMenu.firstPage = true;
                 } else if (userInput.equals("4")){  //log out user and stop the program.
                     Main.loggedInUser = null;
                     Main.isRunning = false;

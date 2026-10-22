@@ -16,11 +16,6 @@ import reservation.ticketReservation;
 
 public class Main{
     public static boolean isRunning = true;
-    public static boolean firstPage = true;
-    public static boolean signUpPage = false;
-    public static boolean logInPage = false;
-    public static boolean attendeePage = false;
-    public static boolean adminPage = false;
     public static User loggedInUser = null;
     public static ArrayList<User> userList = new ArrayList<>();
     public static ArrayList<Event> eventList = new ArrayList<>();
