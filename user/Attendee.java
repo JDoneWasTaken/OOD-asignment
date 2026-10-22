@@ -33,15 +33,4 @@ public class Attendee extends User {
 
     }
 
-    public void viewSchedule(){
-
-    }
-
-    public void makeReservation(){
-
-    }
-
-    public void reviewBooking(){
-
-    }
 }
