@@ -1,12 +1,12 @@
 package reservation;
 
-public class digitalTicket {
+public class DigitalTicket {
     private int ticketID;
-    private ticketReservation reservation;
+    private TicketReservation reservation;
 
 
 
-    public digitalTicket (int ticketID, ticketReservation reservation){
+    public DigitalTicket (int ticketID, TicketReservation reservation){
         this.ticketID = ticketID;
         this.reservation = reservation;
     }
@@ -15,7 +15,7 @@ public class digitalTicket {
         return this.ticketID;
     }
 
-    public ticketReservation getReservation() {
+    public TicketReservation getReservation() {
         return this.reservation;
     }
 

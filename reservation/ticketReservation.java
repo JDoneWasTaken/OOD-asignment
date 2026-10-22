@@ -3,7 +3,7 @@ package reservation;
 import user.User;
 import event.Event;
 
-public class ticketReservation{
+public class TicketReservation{
     private int reservationID;
     private User attendee;
     private Event bookedEvent;
@@ -12,7 +12,7 @@ public class ticketReservation{
     private String bookingTime;
     private double finalPrice;
 
-    public ticketReservation (int reservationID, User attendee, Event bookedEvent, String seatNumber, int ticketQuantity, String bookingTime, double finalPrice) {
+    public TicketReservation (int reservationID, User attendee, Event bookedEvent, String seatNumber, int ticketQuantity, String bookingTime, double finalPrice) {
         this.reservationID = reservationID;
         this.attendee = attendee;
         this.bookedEvent = bookedEvent;

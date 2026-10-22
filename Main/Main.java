@@ -8,10 +8,10 @@ import user.Attendee;
 import event.Event;
 import event.ConcertEvent;
 import event.ConferenceEvent;
-import menu.userMenu;
-import menu.userDashboard;
-import reservation.digitalTicket;
-import reservation.ticketReservation;
+import menu.UserDashboard;
+import menu.UserMenu;
+import reservation.DigitalTicket;
+import reservation.TicketReservation;
 
 
 public class Main{
@@ -19,8 +19,8 @@ public class Main{
     public static User loggedInUser = null;
     public static ArrayList<User> userList = new ArrayList<>();
     public static ArrayList<Event> eventList = new ArrayList<>();
-    public static ArrayList<ticketReservation> reservationList = new ArrayList<>();
-    public static ArrayList<digitalTicket> digitalTicketList = new ArrayList<>();
+    public static ArrayList<TicketReservation> reservationList = new ArrayList<>();
+    public static ArrayList<DigitalTicket> digitalTicketList = new ArrayList<>();
 
 
     public static void main(String[] args){
@@ -43,13 +43,13 @@ public class Main{
             System.out.println("Welcome to the Event Ticketing System");
             System.out.println("=========================================");
             
-            userMenu.firstPage(sc);
+            UserMenu.firstPage(sc);
 
-            userMenu.signUpPage(sc);
+            UserMenu.signUpPage(sc);
 
-            userMenu.logInPage(sc);
+            UserMenu.logInPage(sc);
 
-            userDashboard.dashboardPage(sc);
+            UserDashboard.dashboardPage(sc);
         }
         sc.close();
     }

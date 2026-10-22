@@ -9,7 +9,7 @@ import main.Main;
 import user.Attendee;
 
 
-public class userDashboard {
+public class UserDashboard {
     public static void pressEnterToContinue(Scanner sc) {
         System.out.println("\nPress enter to continue...");
         sc.nextLine();
@@ -45,15 +45,15 @@ public class userDashboard {
 
                 if (userInput.equals("1")){
                     //System.out.println("(Browse Upcoming Schedule)");
-                    viewSchedule.veiwSchedule(sc);
+                    ViewSchedule.veiwSchedule(sc);
                 } else if (userInput.equals("2")){
                     //System.out.println("(View pass reservation)");
-                    viewReservations.displayReservations(sc);
+                    ViewReservations.displayReservations(sc);
                 } else if (userInput.equals("3")) {
-                    viewReservations.displayTickets(sc);
+                    ViewReservations.displayTickets(sc);
                 } else if (userInput.equals("4")){  //log out user and back to first page.
                     Main.loggedInUser = null;
-                    userMenu.firstPage = true;
+                    UserMenu.firstPage = true;
                 } else if (userInput.equals("5")){  //log out user and stop the program.
                     Main.loggedInUser = null;
                     Main.isRunning = false;
@@ -72,13 +72,13 @@ public class userDashboard {
 
                 if (userInput.equals("1")){
                     //Add event
-                    eventManager.addEvent(sc);
+                    EventManager.addEvent(sc);
                 } else if (userInput.equals("2")){
                     //Update event details
-                    eventManager.updateEvent(sc);
+                    EventManager.updateEvent(sc);
                 } else if (userInput.equals("3")){  //log out user and back to first page.
                     Main.loggedInUser = null;
-                    userMenu.firstPage = true;
+                    UserMenu.firstPage = true;
                 } else if (userInput.equals("4")){  //log out user and stop the program.
                     Main.loggedInUser = null;
                     Main.isRunning = false;

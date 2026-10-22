@@ -22,7 +22,6 @@ public abstract class Event {
     public int getEventID() {
         return this.eventID;
     }
-    
 
     public String getEventName() {
         return this.eventName;

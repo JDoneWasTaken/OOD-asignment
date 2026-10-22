@@ -7,7 +7,7 @@ import event.ConcertEvent;
 import event.ConferenceEvent;
 import main.Main;
 
-public class eventManager {
+public class EventManager {
     public static void addEvent(Scanner sc){
         String eventType = "empty";
         String eventName = null;
@@ -41,7 +41,7 @@ public class eventManager {
             System.out.println("Please enter an event date (yyyy-mm-dd):");
             eventDate = sc.nextLine();
 
-            if (userDashboard.checkDate(eventDate)) {
+            if (UserDashboard.checkDate(eventDate)) {
                 validInput = true;
                 break;
             } else {
@@ -221,7 +221,7 @@ public class eventManager {
                         e.displayEventDetails();
                         System.out.println("Event name successfully changed!");
                         System.out.println("===========================================");
-                        userDashboard.pressEnterToContinue(sc);
+                        UserDashboard.pressEnterToContinue(sc);
                     } else if (userInput.equalsIgnoreCase("2")) {
                         if (e instanceof ConcertEvent) {
                             ConcertEvent concert = (ConcertEvent) e;
@@ -231,7 +231,7 @@ public class eventManager {
                             e.displayEventDetails();
                             System.out.println("Artist name successfully changed!");
                             System.out.println("========================================");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                         } else {
                             ConferenceEvent conference = (ConferenceEvent) e;
                             System.out.println("Enter a new Speaker name:");
@@ -240,7 +240,7 @@ public class eventManager {
                             e.displayEventDetails();
                             System.out.println("Speaker name successfully changed!");
                             System.out.println("========================================");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                         }
                     } else if (userInput.equalsIgnoreCase("3")) {
                         System.out.println("Enter a new venue:");
@@ -249,12 +249,12 @@ public class eventManager {
                         e.displayEventDetails();
                         System.out.println("Venue successfully changed!");
                         System.out.println("========================================");
-                        userDashboard.pressEnterToContinue(sc);
+                        UserDashboard.pressEnterToContinue(sc);
                     } else if (userInput.equalsIgnoreCase("4")) {
                         validInput = true;
                     } else {
                         System.out.println("Please enter a valid choice (1/2/3/4)");
-                        userDashboard.pressEnterToContinue(sc);
+                        UserDashboard.pressEnterToContinue(sc);
                     }
                 }
                 validInput = false;
@@ -262,7 +262,7 @@ public class eventManager {
         }
         if (eventSelected == null) {
             System.out.println("Please enter a valid event name.");
-            userDashboard.pressEnterToContinue(sc);
+            UserDashboard.pressEnterToContinue(sc);
         }
     }
 

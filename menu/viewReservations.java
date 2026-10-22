@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import main.Main;
-import reservation.digitalTicket;
-import reservation.ticketReservation;
+import reservation.DigitalTicket;
+import reservation.TicketReservation;
 
-public class viewReservations {
+public class ViewReservations {
     public static void displayReservations(Scanner sc) {
         boolean hasReservation = false;
         int index = 1;
         System.out.println("===========================================");
         System.out.println("            EVENT RESERVATIONS             ");
         System.out.println("===========================================");
-        ArrayList<ticketReservation> myReservations = new ArrayList<>();
+        ArrayList<TicketReservation> myReservations = new ArrayList<>();
 
-        for (ticketReservation r: Main.reservationList) {
+        for (TicketReservation r: Main.reservationList) {
             if (r.getAttendee().equals(Main.loggedInUser)) {
                 myReservations.add(r);
                 System.out.println("              ~ Event " + index + " ~           ");
@@ -29,9 +29,9 @@ public class viewReservations {
 
         if (!hasReservation) {
             System.out.println("You haven't make any reservation.");
-            userDashboard.pressEnterToContinue(sc);
+            UserDashboard.pressEnterToContinue(sc);
         } else {
-            userDashboard.pressEnterToContinue(sc);
+            UserDashboard.pressEnterToContinue(sc);
         }
     }
 
@@ -42,9 +42,9 @@ public class viewReservations {
         System.out.println("          [#]  Digital Ticket             ");
         System.out.println("=========================================");
 
-        ArrayList<digitalTicket> myTickets = new ArrayList<>();
+        ArrayList<DigitalTicket> myTickets = new ArrayList<>();
 
-        for (digitalTicket r: Main.digitalTicketList) {
+        for (DigitalTicket r: Main.digitalTicketList) {
             if (r.getReservation().getAttendee().equals(Main.loggedInUser)) {
                 myTickets.add(r);
                 System.out.println("              ~ Ticket " + index + " ~           ");
@@ -57,9 +57,9 @@ public class viewReservations {
 
         if (!hasTickets) {
             System.out.println("You don't have any ticket yet.");
-            userDashboard.pressEnterToContinue(sc);
+            UserDashboard.pressEnterToContinue(sc);
         } else {
-            userDashboard.pressEnterToContinue(sc);
+            UserDashboard.pressEnterToContinue(sc);
         }
     }
 }

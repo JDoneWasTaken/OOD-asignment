@@ -10,11 +10,11 @@ import event.Event;
 import event.ConcertEvent;
 import event.ConferenceEvent;
 import main.Main;
-import reservation.digitalTicket;
-import reservation.ticketReservation;
+import reservation.DigitalTicket;
+import reservation.TicketReservation;
 import user.Attendee;
 
-public class viewSchedule {
+public class ViewSchedule {
     public static void veiwSchedule(Scanner sc) {
         boolean viewingSchedule = true;
         String userInput = "empty";
@@ -54,7 +54,7 @@ public class viewSchedule {
                         if (e.getEventName().equalsIgnoreCase(userInput)){
                             eventSelected = e;
                             e.displayEventDetails();
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             validInput = true;
                             break;
                         }
@@ -226,30 +226,30 @@ public class viewSchedule {
                             concert.setReservedVipSeats(concert.getReservedVipSeats()+vipSeats);
 
                             int nextId = Main.reservationList.size() + 1;
-                            ticketReservation newReservation = new ticketReservation(nextId, Main.loggedInUser, e, finalSeatArrange, ticketQuantity, bookingTime, finalPrice);
+                            TicketReservation newReservation = new TicketReservation(nextId, Main.loggedInUser, e, finalSeatArrange, ticketQuantity, bookingTime, finalPrice);
                             nextId = Main.digitalTicketList.size() + 1;
-                            digitalTicket newTicket = new digitalTicket(nextId, newReservation);
+                            DigitalTicket newTicket = new DigitalTicket(nextId, newReservation);
 
                             Main.reservationList.add(newReservation);
                             Main.digitalTicketList.add(newTicket);
                             System.out.println("Thank you for the payment!");
                             System.out.println("Reservation created successfully.");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             validInput = true;
                         } else if (userInput.equals("4")) {
                             System.out.println("Reservation cancelled.");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             validInput = true;
                         } else {
                             System.out.println("Please choose between 1-4 only.");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             System.out.println("=======================================");
                         }
                     }
 
                 } else if (userInput.equalsIgnoreCase("n")) {
                     System.out.println("Reservation cancelled.");
-                    userDashboard.pressEnterToContinue(sc);
+                    UserDashboard.pressEnterToContinue(sc);
                     validInput = true;
                 } else {
                     System.out.println("Please enter Y or N only.");
@@ -346,30 +346,30 @@ public class viewSchedule {
                             conference.setReservedSeats(conference.getReservedSeats()+normalSeats);
 
                             int nextId = Main.reservationList.size() + 1;
-                            ticketReservation newReservation = new ticketReservation(nextId, Main.loggedInUser, e, finalSeatArrange, ticketQuantity, bookingTime, finalPrice);
+                            TicketReservation newReservation = new TicketReservation(nextId, Main.loggedInUser, e, finalSeatArrange, ticketQuantity, bookingTime, finalPrice);
                             nextId = Main.digitalTicketList.size() + 1;
-                            digitalTicket newTicket = new digitalTicket(nextId, newReservation);
+                            DigitalTicket newTicket = new DigitalTicket(nextId, newReservation);
 
                             Main.reservationList.add(newReservation);
                             Main.digitalTicketList.add(newTicket);
                             System.out.println("Thank you for the payment!");
                             System.out.println("Reservation created successfully.");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             validInput = true;
                         } else if (userInput.equals("4")) {
                             System.out.println("Reservation cancelled.");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             validInput = true;
                         } else {
                             System.out.println("Please choose between 1-4 only.");
-                            userDashboard.pressEnterToContinue(sc);
+                            UserDashboard.pressEnterToContinue(sc);
                             System.out.println("=======================================");
                         }
                     }
 
                 } else if (userInput.equalsIgnoreCase("n")) {
                     System.out.println("Reservation cancelled.");
-                    userDashboard.pressEnterToContinue(sc);
+                    UserDashboard.pressEnterToContinue(sc);
                     validInput = true;
                 } else {
                     System.out.println("Please enter Y or N only.");
