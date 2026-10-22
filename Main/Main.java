@@ -50,9 +50,6 @@ public class Main{
             userMenu.logInPage(sc);
 
             userDashboard.dashboardPage(sc);
-            //dashboardPage(sc, eventList);
-            
-            //isRunning = false;
         }
         sc.close();
     }

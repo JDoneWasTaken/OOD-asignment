@@ -176,7 +176,7 @@ public class eventManager {
         validInput = false;
     }
 
-    public static void manageEvent(Scanner sc) {
+    public static void updateEvent(Scanner sc) {
         boolean validInput = false;
         String userInput = null;
         Event eventSelected = null;
@@ -196,13 +196,13 @@ public class eventManager {
         }
         System.out.println("========================================================");
 
-        System.out.println("Please enter the title of the event you want to edit");
+        System.out.println("Please enter the title of the event you want to update");
         userInput = sc.nextLine();
         for (Event e: Main.eventList){
             if (e.getEventName().equalsIgnoreCase(userInput)){
                 eventSelected = e;
                 while (!validInput) {
-                    System.out.println("Please choose what you want to edit from the following:");
+                    System.out.println("Please choose what you want to update from the following:");
                     System.out.println("1. Event name " + e.getEventName());
                     if (e instanceof ConcertEvent){
                         ConcertEvent concert = (ConcertEvent) e;

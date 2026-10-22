@@ -75,7 +75,7 @@ public class userDashboard {
                     eventManager.addEvent(sc);
                 } else if (userInput.equals("2")){
                     //Update event details
-                    eventManager.manageEvent(sc);
+                    eventManager.updateEvent(sc);
                 } else if (userInput.equals("3")){  //log out user and back to first page.
                     Main.loggedInUser = null;
                     userMenu.firstPage = true;
