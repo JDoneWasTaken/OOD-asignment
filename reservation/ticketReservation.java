@@ -54,8 +54,9 @@ public class ticketReservation{
         System.out.println("-------------------------------------------");
         System.out.println("Event name: " + bookedEvent.getEventName());
         System.out.println("Reserved by: " + attendee.getUsername());
+        System.out.println("Venue: " + bookedEvent.getVenue());
         System.out.println("Reserved Seats: " + getSeatNumber());
-        System.out.println("Booking time : " + getBookingTime());
+        System.out.println("Booking time: " + getBookingTime());
         System.out.println("Ticket quantity: " + getTicketQuantity());
         System.out.println("------------------------------------------");
         System.out.println("Final Price: RM" + (getFinalPrice()));

@@ -24,6 +24,7 @@ public class digitalTicket {
         System.out.println("Ticket ID: " + getTicketID());
         System.out.println("Event name: " + reservation.getBookedEvent().getEventName());
         System.out.println("Reserved by: " + reservation.getAttendee().getUsername());
+        System.out.println("Venue: " + reservation.getBookedEvent().getVenue());
         System.out.println("Reserved Seats: " + reservation.getSeatNumber());
         System.out.println("Booking time : " + reservation.getBookingTime());
         System.out.println("-----------------------------------------");

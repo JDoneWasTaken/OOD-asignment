@@ -196,6 +196,7 @@ public class viewSchedule {
             System.out.println("------------------------------------------------------------");
             System.out.println("Event name: " + e.getEventName());
             System.out.println("Reserved by: " + Main.loggedInUser.getUsername());
+            System.out.println("Venue: " + e.getVenue());
             System.out.println("Reserved Seats: " + finalSeatArrange);
             System.out.println("Ticket quantity: " + ticketQuantity);
             System.out.println("------------------------------------------------------------");
@@ -315,6 +316,7 @@ public class viewSchedule {
             System.out.println("--------------------------------------------------------");
             System.out.println("Event name: " + e.getEventName());
             System.out.println("Reserved by: " + Main.loggedInUser.getUsername());
+            System.out.println("Venue: " + e.getVenue());
             System.out.println("Reserved Seats: " + finalSeatArrange);
             System.out.println("Ticket quantity: " + ticketQuantity);
             System.out.println("--------------------------------------------------------");
