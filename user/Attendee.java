@@ -1,7 +1,12 @@
 package user;
 
+/**
+ * Child class of User
+ * Attendee
+ */
 public class Attendee extends User {
-    int loyaltyPoint = 0;
+    //Loyatly point that attendee can get from reserving an event and use it for discount
+    private int loyaltyPoint = 0; 
 
 
     public Attendee(int userID, String username, String password, int loyaltyPoint){
@@ -22,7 +27,7 @@ public class Attendee extends User {
         System.out.println("===========================================");
         System.out.println("            ATTENDEE  DASHBOARD            ");
         System.out.println("-------------------------------------------");
-        System.out.println("Please choose an option below (1/2/3/4):");
+        System.out.println("Please choose an option below (1/2/3/4/5):");
         System.out.println("1. View Upcoming Schedule");
         System.out.println("2. Review past booking");
         System.out.println("3. View digital tickets");

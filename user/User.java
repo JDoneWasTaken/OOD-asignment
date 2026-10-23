@@ -1,5 +1,9 @@
 package user;
 
+/**
+ * Parent class of admin and attendee
+ * User
+ */
 public class User{
     private int userID;
     private String username;
@@ -26,7 +30,10 @@ public class User{
     public String getPassword(){
         return this.password;
     }
-
+    
+    /**
+     * Display menu for each child
+     */
     public void displayDashboard(){
         System.out.println("(Dashboard placeholder)");
     }

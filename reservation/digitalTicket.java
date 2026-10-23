@@ -1,5 +1,9 @@
 package reservation;
 
+/**
+ * Digital ticket class that created along with reservaation to store necessary information about the Event
+ * DigitalTicket
+ */
 public class DigitalTicket {
     private int ticketID;
     private TicketReservation reservation;
@@ -19,6 +23,9 @@ public class DigitalTicket {
         return this.reservation;
     }
 
+    /**
+     * Display necessary information of the Event, for Attendee to show before going in an Event
+     */
     public void viewTicket() {
         System.out.println("-----------------------------------------");
         System.out.println("Ticket ID: " + getTicketID());

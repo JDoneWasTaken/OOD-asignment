@@ -17,6 +17,8 @@ import reservation.TicketReservation;
 public class Main{
     public static boolean isRunning = true;
     public static User loggedInUser = null;
+
+    //ArrayLists that store all User, Event, Reservation and Ticket created
     public static ArrayList<User> userList = new ArrayList<>();
     public static ArrayList<Event> eventList = new ArrayList<>();
     public static ArrayList<TicketReservation> reservationList = new ArrayList<>();
@@ -26,9 +28,11 @@ public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
+        //Pre-generated Users (1 Admin, 1 Attendee)
         Admin user1 = new Admin(1, "Joseph", "123");
         Attendee user2 = new Attendee(2, "Bennett", "321", 0);
 
+        //Pre-generated Events (1 Concert, 1 Conference)
         ConcertEvent event1 = new ConcertEvent(1, "MCKL Tour", "2026-10-30", "MCKL", 200, 300, 0, "Jason", 30, 0,  400);
         ConferenceEvent event2 = new ConferenceEvent(2, "JAVA for beginner","2026-11-01", "Lalaport", 10, 20, 0, "Galvin");
 
@@ -38,6 +42,7 @@ public class Main{
         eventList.add(event1);
         eventList.add(event2);
 
+        //Program will only stop when IsRunning become false
         while (isRunning){
             System.out.println("=========================================");
             System.out.println("Welcome to the Event Ticketing System");

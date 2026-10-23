@@ -3,6 +3,10 @@ package reservation;
 import user.User;
 import event.Event;
 
+/**
+ * Reservation class that record down every reservation transaction made by Attendee
+ * TicketReservation
+ */
 public class TicketReservation{
     private int reservationID;
     private User attendee;
@@ -50,6 +54,9 @@ public class TicketReservation{
         return this.finalPrice;
     }
 
+    /**
+     * Display a summary of reservation
+     */
     public void displayReservation() {
         System.out.println("-------------------------------------------");
         System.out.println("Event name: " + bookedEvent.getEventName());
@@ -59,7 +66,7 @@ public class TicketReservation{
         System.out.println("Booking time: " + getBookingTime());
         System.out.println("Ticket quantity: " + getTicketQuantity());
         System.out.println("------------------------------------------");
-        System.out.println("Final Price: RM" + (getFinalPrice()));
+        System.out.println("Final Price: RM" + (String.format("%,.2f",getFinalPrice())));
         System.out.println("===========================================");
     }
 

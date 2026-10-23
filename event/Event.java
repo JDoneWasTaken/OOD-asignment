@@ -1,5 +1,9 @@
 package event;
 
+/**
+ * An abstract parent class for events
+ * Event
+ */
 public abstract class Event {
     private int eventID;
     private String eventName;
@@ -59,5 +63,29 @@ public abstract class Event {
         this.reservedSeats = reservedSeats;
     }
 
+    /**
+     * A one line simple display of an event
+     * @param numOfEvent to arrange the events is ascending order
+     */
+    public abstract void listingEventDetails(int numOfEvent);
+
+    /**
+     * Full details display of an Event
+     */
     public abstract void displayEventDetails();
+
+    /**
+     * A summary of Event reservation by attendee, similar to displayEventDetails but with unique seats number
+     * @param e Event chosen
+     * @param finalSeatArrange A string that include all the unique seats number
+     * @param ticketQuantity total ticket the attendee reserved
+     * @param finalPrice final price after all calculation like earlybird discount and loyalty point discount
+     */
+    public abstract void reservationSummary(Event e, String finalSeatArrange, int ticketQuantity, double finalPrice);
+
+    /**
+     * Check if the event still have slots or not
+     * @return true if no slots left, false if there are still slots
+     */
+    public abstract boolean zeroSeatCheck();
 }

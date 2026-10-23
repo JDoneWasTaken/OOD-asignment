@@ -8,15 +8,19 @@ import event.ConferenceEvent;
 import main.Main;
 
 public class EventManager {
+    /**
+     * Let any admin add new events 
+     * @param sc
+     */
     public static void addEvent(Scanner sc){
         String eventType = "empty";
-        String eventName = null;
-        String eventDate = null;
-        String venue = null;
+        String eventName = "";
+        String eventDate = "";
+        String venue = "";
         double baseTicketPrice = 0;
         int maxCapacity = 0;
-        String speakerName = null;
-        String artistName = null;
+        String speakerName = "";
+        String artistName = "";
         int vipSeats = 0;
         double vipPrice = 0;
         boolean validInput = false;
@@ -34,8 +38,16 @@ public class EventManager {
         }
         validInput = false;
 
-        System.out.println("Please enter an event name:");
-        eventName = sc.nextLine();
+        while (!validInput) {
+            validInput = true;
+            System.out.println("Please enter an event name:");
+            eventName = sc.nextLine();
+            if (eventName.equals("")){
+                System.out.println("Please enter a non-empty event name.");
+                validInput = false;
+            }
+        }
+        validInput = false;
 
         while (!validInput) {
             System.out.println("Please enter an event date (yyyy-mm-dd):");
@@ -50,8 +62,16 @@ public class EventManager {
         }
         validInput = false;
 
-        System.out.println("Please enter a venue where the event will be hold:");
-        venue = sc.nextLine();
+        while (!validInput) {
+            validInput = true;
+            System.out.println("Please enter a venue where the event will be hold:");
+            venue = sc.nextLine();
+            if (venue.equals("")){
+                System.out.println("Please enter a non-empty venue.");
+                validInput = false;
+            }
+        }
+        validInput = false;
 
         while (!validInput){
             System.out.println("Please enter a base ticket price");
@@ -59,7 +79,7 @@ public class EventManager {
             if (sc.hasNextDouble()){
                 baseTicketPrice = sc.nextDouble();
                 if (baseTicketPrice >= 0) {
-                    System.out.println("Base ticket price = RM" + baseTicketPrice);
+                    System.out.println("Base ticket price = RM" + String.format("%,.2f", baseTicketPrice));
                     validInput = true;
                 } else {
                     System.out.println("Please enter a positive amount.");
@@ -78,7 +98,7 @@ public class EventManager {
 
             if (sc.hasNextInt()){
                 maxCapacity = sc.nextInt();
-                if (maxCapacity > 10){
+                if (maxCapacity >= 10){
                     validInput = true;
                 } else {
                     System.out.println("Please enter at least 10 seats.");
@@ -90,19 +110,27 @@ public class EventManager {
             sc.nextLine();
         }
         validInput = false;
+        System.out.println("Event type chosen: " + eventType);
 
         if (eventType.equalsIgnoreCase("Concert")){
             //if Concert was chosen as the event
-            System.out.println("Event type chosen: " + eventType);
-            System.out.println("Please enter an Artist name:");
-            artistName = sc.nextLine();
+
+            while (!validInput) {
+                validInput = true;
+                System.out.println("Please enter an Artist name:");
+                artistName = sc.nextLine();
+                if (artistName.equals("")) {
+                    System.out.println("Please enter a non-empty artist name.");
+                    validInput = false;
+                }
+            }
+            validInput = false;
 
             while (!validInput){
                 System.out.println("Please enter the amount of VIP seats:");
 
                 if (sc.hasNextInt()){
                     vipSeats = sc.nextInt();
-                    System.out.println(vipSeats);
                     if ((vipSeats > 0) && (vipSeats < maxCapacity)){
                         
                         System.out.println("VIP seats = " + (vipSeats));
@@ -125,7 +153,7 @@ public class EventManager {
                 if (sc.hasNextDouble()){
                     vipPrice = sc.nextDouble();
                     if (vipPrice > baseTicketPrice) {
-                        System.out.println("VIP ticket price = RM" + (vipPrice));
+                        System.out.println("VIP ticket price = RM" + String.format("%,.2f", vipPrice));
                         validInput = true;
                     } else {
                         System.out.println("VIP ticket price must be higher than base ticket price");
@@ -144,9 +172,18 @@ public class EventManager {
             newEvent.displayEventDetails();
 
         } else {
-            //if Conference was chosen as the event
-            System.out.println("Please enter a Speaker name:");
-            speakerName = sc.nextLine();
+            //if Conference was chosen as the eventw
+
+            while (!validInput){
+                validInput = true;
+                System.out.println("Please enter a Speaker name:");
+                speakerName = sc.nextLine();
+                if (speakerName.equals("")) {
+                    System.out.println("Please enter a non-empty speaker name.");
+                    validInput = false;
+                }
+            }
+            validInput = false;
 
             int nextId = Main.eventList.size() + 1;
             ConferenceEvent newEvent = new ConferenceEvent(nextId, eventName, eventDate, venue, baseTicketPrice, maxCapacity, 0,  speakerName);
@@ -176,6 +213,10 @@ public class EventManager {
         validInput = false;
     }
 
+    /**
+     * Let any admin update some event details like event name, artist/speaker name and venue.
+     * @param sc
+     */
     public static void updateEvent(Scanner sc) {
         boolean validInput = false;
         String userInput = null;
@@ -185,13 +226,7 @@ public class EventManager {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         int numOfEvent = 1;
         for (Event e: Main.eventList) {
-            if (e instanceof ConcertEvent) {
-                ConcertEvent concert = (ConcertEvent) e;
-                System.out.println(numOfEvent + ") (Concert) Title: " + concert.getEventName() + " | Artist: " + concert.getArtistName() + " | Venue: " + concert.getVenue() + " | Seats left: Normal (" + (concert.getMaxCapacity()-concert.getReservedSeats()) + ") VIP (" + (concert.getVipSeats()-concert.getReservedVipSeats())   + ") | Price: Normal Ticket ~ " + concert.getBaseTicketPrice() + " VIP ticket ~ " + concert.getVipPrice());
-            } else {
-                ConferenceEvent conference = (ConferenceEvent) e ;
-                System.out.println(numOfEvent + ") (Conference) Title: " + conference.getEventName() + " | Speaker: " + conference.getSpeakerName() + " | Venue: " + conference.getVenue() + " | Seats left: " + (conference.getMaxCapacity()-conference.getReservedSeats()) + " | Ticket Price: " + conference.getBaseTicketPrice() );
-            }
+            e.listingEventDetails(numOfEvent);
             numOfEvent += 1;
         }
         System.out.println("========================================================");
@@ -202,8 +237,8 @@ public class EventManager {
             if (e.getEventName().equalsIgnoreCase(userInput)){
                 eventSelected = e;
                 while (!validInput) {
-                    System.out.println("Please choose what you want to update from the following:");
-                    System.out.println("1. Event name " + e.getEventName());
+                    System.out.println("Please choose what you want to update from the following (1/2/3/4):");
+                    System.out.println("1. Event name: " + e.getEventName());
                     if (e instanceof ConcertEvent){
                         ConcertEvent concert = (ConcertEvent) e;
                         System.out.println("2. Artist name: " + concert.getArtistName());
@@ -215,9 +250,17 @@ public class EventManager {
                     System.out.println("4. Cancel");
                     userInput = sc.nextLine();
                     if (userInput.equalsIgnoreCase("1")) {
-                        System.out.println("Enter a new event name:");
-                        userInput = sc.nextLine();
-                        e.setEventName(userInput);
+                        while (!validInput) {
+                            System.out.println("Enter a new event name:");
+                            userInput = sc.nextLine();
+                            if (userInput.equals("")) {
+                                System.out.println("Please enter a non-empty event name.");
+                            } else {
+                                e.setEventName(userInput);
+                                validInput = true;
+                            }
+                        }
+                        validInput = false;
                         e.displayEventDetails();
                         System.out.println("Event name successfully changed!");
                         System.out.println("===========================================");
@@ -225,27 +268,51 @@ public class EventManager {
                     } else if (userInput.equalsIgnoreCase("2")) {
                         if (e instanceof ConcertEvent) {
                             ConcertEvent concert = (ConcertEvent) e;
-                            System.out.println("Enter a new Artist name:");
+                            while (!validInput) {
+                                System.out.println("Enter a new Artist name:");
                             userInput = sc.nextLine();
-                            concert.setArtistName(userInput);
+                                if (userInput.equals("")) {
+                                    System.out.println("Please enter a non-empty artsit name.");
+                                } else {
+                                    concert.setArtistName(userInput);
+                                    validInput = true;
+                                }
+                            }   
+                            validInput = false;
                             e.displayEventDetails();
                             System.out.println("Artist name successfully changed!");
                             System.out.println("========================================");
                             UserDashboard.pressEnterToContinue(sc);
                         } else {
                             ConferenceEvent conference = (ConferenceEvent) e;
-                            System.out.println("Enter a new Speaker name:");
+                            while (!validInput) {
+                                System.out.println("Enter a new Speaker name:");
                             userInput = sc.nextLine();
-                            conference.setSpeakerName(userInput);
+                                if (userInput.equals("")) {
+                                    System.out.println("Please enter a non-empty speaker name.");
+                                } else {
+                                    conference.setSpeakerName(userInput);
+                                    validInput = true;
+                                }
+                            }
+                            validInput = false;
                             e.displayEventDetails();
                             System.out.println("Speaker name successfully changed!");
                             System.out.println("========================================");
                             UserDashboard.pressEnterToContinue(sc);
                         }
                     } else if (userInput.equalsIgnoreCase("3")) {
-                        System.out.println("Enter a new venue:");
-                        userInput = sc.nextLine();
-                        e.setVenue(userInput);
+                        while (!validInput) {
+                            System.out.println("Enter a new venue:");
+                            userInput = sc.nextLine();
+                            if (userInput.equals("")) {
+                                System.out.println("Please enter a non-empty venue.");
+                            } else {
+                                e.setVenue(userInput);
+                                validInput = true;
+                            }
+                        }
+                        validInput = false;
                         e.displayEventDetails();
                         System.out.println("Venue successfully changed!");
                         System.out.println("========================================");
@@ -258,6 +325,7 @@ public class EventManager {
                     }
                 }
                 validInput = false;
+                break;
             }
         }
         if (eventSelected == null) {
