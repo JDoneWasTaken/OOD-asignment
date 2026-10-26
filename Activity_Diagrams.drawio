@@ -1,0 +1,620 @@
+<mxfile host="app.diagrams.net" modified="2026-10-25T18:15:00.000Z" agent="Antigravity" version="22.0.0" type="device">
+  <diagram id="activity-booking-flow" name="1. Event Discovery, Seat Locking &amp; Checkout">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title1" value="Activity Diagram: Event Discovery, Seat Locking &amp; Checkout" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ================= SWIMLANES ================= -->
+        <!-- Attendee Lane -->
+        <mxCell id="lane_attendee" value="Attendee" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=13;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="310" height="1520" as="geometry" />
+        </mxCell>
+
+        <!-- Initial Node -->
+        <mxCell id="init_node" value="" style="ellipse;fillColor=#000000;strokeColor=none;html=1;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="140" y="50" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Attendee: Browse -->
+        <mxCell id="act_browse" value="Browse Upcoming Events Schedule" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="65" y="110" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Attendee: Select Event -->
+        <mxCell id="act_select_event" value="Select Event Title to Reserve" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="65" y="260" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Attendee: Input Seats -->
+        <mxCell id="act_input_seats" value="Input Desired Seat Quantities&#xa;(Normal &amp; VIP Seats)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="65" y="470" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Attendee Decision: Confirm Reservation? -->
+        <mxCell id="dec_confirm" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="130" y="800" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_confirm" value="Confirm&#xa;Reservation?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="40" y="805" width="80" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Attendee: Select Payment Method -->
+        <mxCell id="act_select_payment" value="Select Payment Method &amp;&#xa;Provide Payment Details" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="65" y="940" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Attendee: View Ticket -->
+        <mxCell id="act_view_ticket" value="Receive Booking Confirmation &amp;&#xa;Digital Ticket" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="65" y="1370" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Final Node -->
+        <mxCell id="final_success" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="lane_attendee">
+          <mxGeometry x="140" y="1460" width="30" height="30" as="geometry" />
+        </mxCell>
+
+
+        <!-- Ticketing System Lane -->
+        <mxCell id="lane_system" value="Ticketing System (ViewSchedule / Event)" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=13;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="350" y="70" width="410" height="1520" as="geometry" />
+        </mxCell>
+
+        <!-- System: Fetch Events -->
+        <mxCell id="act_fetch_events" value="Retrieve Active Events &amp;&#xa;Display Event Schedule" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="110" y="180" width="190" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System Decision: Check Availability -->
+        <mxCell id="dec_seats_avail" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_system">
+          <mxGeometry x="180" y="325" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_avail" value="zeroSeatCheck()&#xa;== false?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_system">
+          <mxGeometry x="235" y="330" width="90" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- System: Sold out notice -->
+        <mxCell id="act_sold_out" value="Display &quot;Ticket Sold Out&quot; Notice" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#b85450;" vertex="1" parent="lane_system">
+          <mxGeometry x="250" y="400" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="final_soldout" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="lane_system">
+          <mxGeometry x="305" y="465" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- System: Prompt seat tier -->
+        <mxCell id="act_prompt_tiers" value="Display Remaining Tier Quotas&#xa;&amp; Prompt Seat Tiers" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="110" y="400" width="190" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System Decision: Validate Seats -->
+        <mxCell id="dec_valid_quota" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_system">
+          <mxGeometry x="180" y="540" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_valid_seats" value="Requested &lt;=&#xa;Remaining?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_system">
+          <mxGeometry x="235" y="545" width="80" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- System: Lock Seats -->
+        <mxCell id="act_lock_seats" value="Temporarily Hold/Lock Seats &amp;&#xa;Assign Seat Numbers (ST-x, VipST-x)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="100" y="625" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System: Calculate Pricing -->
+        <mxCell id="act_calc_pricing" value="Calculate Final Price&#xa;(Apply Early Bird &amp; Loyalty Discounts)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="100" y="700" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System: Display Summary -->
+        <mxCell id="act_display_summary" value="Display Reservation Summary&#xa;&amp; Prompt Confirmation" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="105" y="775" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System: Discard Reservation -->
+        <mxCell id="act_discard" value="Release Seat Lock &amp;&#xa;Display &quot;Reservation Cancelled&quot;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#b85450;" vertex="1" parent="lane_system">
+          <mxGeometry x="220" y="850" width="170" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="final_cancel" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="lane_system">
+          <mxGeometry x="290" y="915" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- System: Display Payment Options -->
+        <mxCell id="act_display_payment_opts" value="Present Payment Options&#xa;(Card, E-Wallet, Banking)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="110" y="870" width="190" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- System: Abort on Payment Failure -->
+        <mxCell id="act_payment_failed" value="Release Seats &amp; Display&#xa;&quot;Payment / Reservation Aborted&quot;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#b85450;" vertex="1" parent="lane_system">
+          <mxGeometry x="210" y="1165" width="180" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="final_pay_fail" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="lane_system">
+          <mxGeometry x="285" y="1235" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- System: Commit Reservation -->
+        <mxCell id="act_commit_res" value="Commit Seats to Event&#xa;(Update reservedSeats Counters)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="110" y="1215" width="190" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- System: Generate Tickets & Points -->
+        <mxCell id="act_generate_tickets" value="Update Loyalty Points &amp;&#xa;Create TicketReservation &amp; DigitalTicket" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_system">
+          <mxGeometry x="95" y="1290" width="220" height="50" as="geometry" />
+        </mxCell>
+
+
+        <!-- Payment Gateway Lane -->
+        <mxCell id="lane_gateway" value="Payment Gateway (External)" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=13;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="760" y="70" width="290" height="1520" as="geometry" />
+        </mxCell>
+
+        <!-- Gateway: Authorize -->
+        <mxCell id="act_process_payment" value="Verify Payment Credentials &amp;&#xa;Process Transaction" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="lane_gateway">
+          <mxGeometry x="50" y="1010" width="190" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Gateway Decision -->
+        <mxCell id="dec_payment" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_gateway">
+          <mxGeometry x="120" y="1090" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_payment" value="Payment&#xa;Approved?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_gateway">
+          <mxGeometry x="175" y="1095" width="70" height="40" as="geometry" />
+        </mxCell>
+
+
+        <!-- ================= CONTROL FLOWS ================= -->
+        <!-- Start -> Browse -->
+        <mxCell id="f1" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="init_node" target="act_browse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Browse -> Fetch Events -->
+        <mxCell id="f2" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_browse" target="act_fetch_events">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Fetch Events -> Select Event -->
+        <mxCell id="f3" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_fetch_events" target="act_select_event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Select Event -> Check Avail -->
+        <mxCell id="f4" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_select_event" target="dec_seats_avail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Check Avail -> [Sold out] -->
+        <mxCell id="f5_sold" value="[Sold Out]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_seats_avail" target="act_sold_out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f5_sold_end" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_sold_out" target="final_soldout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Check Avail -> [Available] -> Prompt Tiers -->
+        <mxCell id="f5_avail" value="[Available]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;fontSize=10;" edge="1" parent="1" source="dec_seats_avail" target="act_prompt_tiers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Prompt Tiers -> Input Seats -->
+        <mxCell id="f6" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_prompt_tiers" target="act_input_seats">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Input Seats -> Validate Quota -->
+        <mxCell id="f7" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_input_seats" target="dec_valid_quota">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Validate Quota -> [Exceeds quota] (Loop back) -->
+        <mxCell id="f8_exceed" value="[Exceeds Quota]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_valid_quota" target="act_input_seats">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="635" />
+              <mxPoint x="430" y="565" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Validate Quota -> [Valid] -> Lock Seats -->
+        <mxCell id="f8_valid" value="[Valid Count]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;fontSize=10;" edge="1" parent="1" source="dec_valid_quota" target="act_lock_seats">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lock Seats -> Calc Pricing -->
+        <mxCell id="f9" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_lock_seats" target="act_calc_pricing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Calc Pricing -> Display Summary -->
+        <mxCell id="f10" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_calc_pricing" target="act_display_summary">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Display Summary -> Confirm Decision -->
+        <mxCell id="f11" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_display_summary" target="dec_confirm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Confirm Decision -> [Discard / Cancel] -->
+        <mxCell id="f12_cancel" value="[No / Discard]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_confirm" target="act_discard">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="195" y="942" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="f12_cancel_end" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_discard" target="final_cancel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Confirm Decision -> [Confirm / Yes] -> Display Payment Options -->
+        <mxCell id="f12_confirm" value="[Yes / Confirm]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_confirm" target="act_display_payment_opts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Display Payment Options -> Select Payment -->
+        <mxCell id="f13" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_display_payment_opts" target="act_select_payment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Select Payment -> Gateway: Process Payment -->
+        <mxCell id="f14" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_select_payment" target="act_process_payment">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="195" y="1055" />
+              <mxPoint x="905" y="1055" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Process Payment -> Payment Decision -->
+        <mxCell id="f15" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_process_payment" target="dec_payment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Payment Decision -> [Failed / Declined] -->
+        <mxCell id="f16_fail" value="[Declined / Abort]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_payment" target="act_payment_failed">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="905" y="1257" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="f16_fail_end" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_payment_failed" target="final_pay_fail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Payment Decision -> [Approved] -> Commit Reservation -->
+        <mxCell id="f16_appr" value="[Approved]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_payment" target="act_commit_res">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="905" y="1307" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Commit Reservation -> Generate Tickets -->
+        <mxCell id="f17" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_commit_res" target="act_generate_tickets">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Generate Tickets -> View Ticket -->
+        <mxCell id="f18" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_generate_tickets" target="act_view_ticket">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- View Ticket -> Final Node -->
+        <mxCell id="f19" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_view_ticket" target="final_success">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="activity-schedule-management" name="2. Schedule Management Flow">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title2" value="Activity Diagram: Admin Schedule Management (Add &amp; Update Events)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="650" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ================= SWIMLANES ================= -->
+        <!-- Admin Lane -->
+        <mxCell id="lane_admin" value="Admin" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=13;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="450" height="1180" as="geometry" />
+        </mxCell>
+
+        <!-- Initial Node -->
+        <mxCell id="adm_init" value="" style="ellipse;fillColor=#000000;strokeColor=none;html=1;" vertex="1" parent="lane_admin">
+          <mxGeometry x="210" y="50" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Admin Decision: Operation -->
+        <mxCell id="dec_admin_op" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_admin">
+          <mxGeometry x="200" y="110" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_admin_op" value="Choose Operation&#xa;(Add or Update?)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_admin">
+          <mxGeometry x="255" y="115" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Left Branch: Add Event -->
+        <mxCell id="act_adm_input_event" value="Enter Event Parameters&#xa;(Name, Date, Venue, BasePrice, Normal/VIP Capacity, Artist/Speaker)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="lane_admin">
+          <mxGeometry x="20" y="250" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Admin Decision: Confirm Create -->
+        <mxCell id="dec_confirm_create" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_admin">
+          <mxGeometry x="95" y="540" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_confirm_create" value="Confirm&#xa;Creation?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_admin">
+          <mxGeometry x="150" y="545" width="70" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Right Branch: Update Event -->
+        <mxCell id="act_adm_input_title" value="Input Target Event Title&#xa;to Update" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="lane_admin">
+          <mxGeometry x="250" y="250" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Admin Select Parameter -->
+        <mxCell id="act_adm_select_param" value="Select Attribute to Update&#xa;(1:Name, 2:Artist/Speaker, 3:Venue, 4:Cancel)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="lane_admin">
+          <mxGeometry x="245" y="470" width="190" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dec_update_choice" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_admin">
+          <mxGeometry x="315" y="555" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="act_adm_input_new_val" value="Enter New Parameter Value" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="lane_admin">
+          <mxGeometry x="245" y="650" width="190" height="45" as="geometry" />
+        </mxCell>
+
+
+        <!-- System Lane -->
+        <mxCell id="lane_sys2" value="Ticketing System (EventManager / Event)" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fontSize=13;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="490" y="70" width="510" height="1180" as="geometry" />
+        </mxCell>
+
+        <!-- System: Prompt Type -->
+        <mxCell id="act_sys_prompt_type" value="Prompt Event Type&#xa;('Concert' or 'Conference')" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="30" y="170" width="180" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- System Decision: Validate Inputs -->
+        <mxCell id="dec_validate_event" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="95" y="340" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_validate_event" value="Date &gt; Today &amp;&#xa;Seats &gt;= 10?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="150" y="345" width="90" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- System: Preview Event -->
+        <mxCell id="act_sys_preview_event" value="Instantiate Event Object &amp;&#xa;Display Preview Summary" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="30" y="440" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System: Discard Add -->
+        <mxCell id="act_sys_discard_event" value="Remove Pending Event &amp;&#xa;Display &quot;Event Cancelled&quot;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#b85450;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="20" y="620" width="170" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- System: Save New Event -->
+        <mxCell id="act_sys_save_event" value="Save Event to Main.eventList &amp;&#xa;Display Success Message" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="30" y="700" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Right Side: List events for update -->
+        <mxCell id="act_sys_list_events" value="Display List of Upcoming Events&#xa;from Main.eventList" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="270" y="170" width="190" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- System Decision: Event Exists? -->
+        <mxCell id="dec_event_exists" value="" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="340" y="320" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl_exists" value="Event&#xa;Found?" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="395" y="325" width="60" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- System: Display Editable Details -->
+        <mxCell id="act_sys_display_editable" value="Display Current Parameter Values&#xa;&amp; Parameter Options Menu" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="270" y="400" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- System: Cancel Update -->
+        <mxCell id="act_sys_cancel_update" value="Display &quot;Update Cancelled&quot;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#b85450;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="330" y="620" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- System: Apply Setter -->
+        <mxCell id="act_sys_apply_update" value="Invoke Setter on Event&#xa;(setEventName / setVenue / etc.)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;arcSize=25;fillColor=#ffffff;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="270" y="700" width="190" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Merge Node -->
+        <mxCell id="merge_node" value="«merge»" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="228" y="810" width="55" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Final Node -->
+        <mxCell id="adm_final" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="lane_sys2">
+          <mxGeometry x="240" y="900" width="30" height="30" as="geometry" />
+        </mxCell>
+
+
+        <!-- ================= CONTROL FLOWS (DIAGRAM 2) ================= -->
+        <!-- Start -> Op Decision -->
+        <mxCell id="af1" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="adm_init" target="dec_admin_op">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Op Decision -> Add Event Branch -->
+        <mxCell id="af2_add" value="[1: Add Event]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_admin_op" target="act_sys_prompt_type">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="205" />
+              <mxPoint x="610" y="205" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Prompt Type -> Input Params -->
+        <mxCell id="af3" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_prompt_type" target="act_adm_input_event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Input Params -> Validate Event -->
+        <mxCell id="af4" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_adm_input_event" target="dec_validate_event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Validate Event -> [Invalid] (Loop back) -->
+        <mxCell id="af5_invalid" value="[Invalid Date/Seats]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_validate_event" target="act_adm_input_event">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="460" />
+              <mxPoint x="160" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Validate Event -> [Valid] -> Preview Event -->
+        <mxCell id="af5_valid" value="[Valid Inputs]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;fontSize=10;" edge="1" parent="1" source="dec_validate_event" target="act_sys_preview_event">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Preview Event -> Confirm Create -->
+        <mxCell id="af6" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_preview_event" target="dec_confirm_create">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Confirm Create -> [Discard] -->
+        <mxCell id="af7_discard" value="[Discard]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_confirm_create" target="act_sys_discard_event">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="712" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Confirm Create -> [Confirm] -->
+        <mxCell id="af7_confirm" value="[Confirm]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_confirm_create" target="act_sys_save_event">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="795" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Op Decision -> Update Event Branch -->
+        <mxCell id="af2_update" value="[2: Update Event]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_admin_op" target="act_sys_list_events">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="205" />
+              <mxPoint x="855" y="205" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- List Events -> Input Title -->
+        <mxCell id="af8" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_list_events" target="act_adm_input_title">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Input Title -> Event Exists? -->
+        <mxCell id="af9" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_adm_input_title" target="dec_event_exists">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Event Exists? -> [Found] -> Display Editable -->
+        <mxCell id="af10_found" value="[Found]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;fontSize=10;" edge="1" parent="1" source="dec_event_exists" target="act_sys_display_editable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Event Exists? -> [Not Found] (Loop back) -->
+        <mxCell id="af10_not_found" value="[Not Found / Invalid]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_event_exists" target="act_adm_input_title">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="930" y="415" />
+              <mxPoint x="930" y="295" />
+              <mxPoint x="380" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Display Editable -> Select Param -->
+        <mxCell id="af11" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_display_editable" target="act_adm_select_param">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Select Param -> Choice Decision -->
+        <mxCell id="af12" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="act_adm_select_param" target="dec_update_choice">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Choice Decision -> [Cancel] -->
+        <mxCell id="af13_cancel" value="[Option 4: Cancel]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" parent="1" source="dec_update_choice" target="act_sys_cancel_update">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="365" y="710" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Choice Decision -> [Edit Attribute] -->
+        <mxCell id="af13_edit" value="[Option 1/2/3: Edit]" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;fontSize=10;" edge="1" parent="1" source="dec_update_choice" target="act_adm_input_new_val">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Input New Value -> Apply Setter -->
+        <mxCell id="af14" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_adm_input_new_val" target="act_sys_apply_update">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Merges into Final -->
+        <mxCell id="af_m1" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_discard_event" target="merge_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="af_m2" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_save_event" target="merge_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="af_m3" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_cancel_update" target="merge_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="af_m4" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="act_sys_apply_update" target="merge_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="af_final" value="" style="endArrow=open;endSize=8;strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="merge_node" target="adm_final">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,548 @@
+<mxfile host="app.diagrams.net" modified="2026-10-25T16:25:00.000Z" agent="Antigravity" version="22.0.0" type="device">
+  <diagram id="attendee-booking-flow" name="1. Attendee Booking &amp; Payment Flow">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1450" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title1" value="Sequence Diagram: Attendee Booking &amp; Payment Flow (with UML alt, opt &amp; loop)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="750" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Lifelines -->
+        <mxCell id="ll_attendee" value="Attendee" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="80" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ll_dashboard" value=":UserDashboard" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="70" width="130" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ll_viewschedule" value=":ViewSchedule" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="380" y="70" width="130" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ll_main" value=":Main" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="570" y="70" width="100" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ll_event" value="e:ConcertEvent" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="720" y="70" width="130" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ll_reservation" value="newReservation:&#xa;TicketReservation" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="910" y="70" width="140" height="1320" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ll_ticket" value="newTicket:&#xa;DigitalTicket" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="70" width="130" height="1320" as="geometry" />
+        </mxCell>
+
+        <!-- Initial Navigation -->
+        <mxCell id="msg1" value="1: select &quot;1&quot; (View Upcoming Schedule)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="140" as="sourcePoint" />
+            <mxPoint x="265" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg2" value="2: veiwSchedule(sc)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="265" y="170" as="sourcePoint" />
+            <mxPoint x="445" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg3" value="3: get Main.eventList" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="200" as="sourcePoint" />
+            <mxPoint x="620" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg4" value="4: return eventList" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="225" as="sourcePoint" />
+            <mxPoint x="445" y="225" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: loop each event -->
+        <mxCell id="frame_loop1" value="loop [for each Event e in eventList]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=220;height=25;fontSize=11;strokeColor=#6c8ebf;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400" y="250" width="430" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg5" value="5: listingEventDetails(index)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="285" as="sourcePoint" />
+            <mxPoint x="785" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Display to Attendee -->
+        <mxCell id="msg6" value="6: display active events list &amp; prompt options" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="335" as="sourcePoint" />
+            <mxPoint x="80" y="335" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg7" value="7: select &quot;2&quot; (Reserve) &amp; input event title" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="370" as="sourcePoint" />
+            <mxPoint x="445" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg8" value="8: zeroSeatCheck()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="405" as="sourcePoint" />
+            <mxPoint x="785" y="405" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg9" value="9: return seatStatus" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="785" y="430" as="sourcePoint" />
+            <mxPoint x="445" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: alt [zeroSeatCheck() == true] vs [else: seats available] -->
+        <mxCell id="frame_alt_seats" value="alt [zeroSeatCheck() == true (Sold Out)]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=250;height=25;fontSize=11;strokeColor=#d79b00;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="60" y="455" width="1200" height="885" as="geometry" />
+        </mxCell>
+
+        <!-- Sold out branch -->
+        <mxCell id="msg10_soldout" value="print &quot;Ticket sold out.&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="490" as="sourcePoint" />
+            <mxPoint x="80" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Divider line for [else: seats available] -->
+        <mxCell id="div_seats_else" value="[else: seats available]" style="line;strokeWidth=1;dashed=1;labelPosition=right;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="520" as="sourcePoint" />
+            <mxPoint x="1260" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg10" value="10: displayEventDetails()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="545" as="sourcePoint" />
+            <mxPoint x="785" y="545" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg11" value="11: makeReservation(sc, e)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="575" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="475" y="575" />
+              <mxPoint x="475" y="600" />
+            </Array>
+            <mxPoint x="450" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg12" value="12: prompt seat tiers &amp; remaining capacity (Normal / VIP)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="630" as="sourcePoint" />
+            <mxPoint x="80" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg13" value="13: enter normalSeats &amp; vipSeats quantities" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="665" as="sourcePoint" />
+            <mxPoint x="445" y="665" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg14" value="14: assign seat numbers (ST-x, VipST-x)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="695" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="475" y="695" />
+              <mxPoint x="475" y="720" />
+            </Array>
+            <mxPoint x="450" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: opt [daysUntilEvent >= 5] Early bird -->
+        <mxCell id="frame_opt_earlybird" value="opt [daysUntilEvent(e) &gt;= 5 (Early Bird Discount)]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=310;height=25;fontSize=11;strokeColor=#82b366;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380" y="735" width="450" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg_earlybird" value="apply 10% discount: finalPrice = finalPrice * 0.9" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="760" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="475" y="760" />
+              <mxPoint x="475" y="780" />
+            </Array>
+            <mxPoint x="450" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: opt [loyaltyPoint > 0] -->
+        <mxCell id="frame_opt_loyalty" value="opt [attendee.getLoyaltyPoint() &gt; 0]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=220;height=25;fontSize=11;strokeColor=#82b366;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="380" y="805" width="450" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg_loyalty" value="deduct loyalty points from finalPrice" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="830" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="475" y="830" />
+              <mxPoint x="475" y="850" />
+            </Array>
+            <mxPoint x="450" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg15" value="15: reservationSummary(e, seatArrange, qty, price)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="880" as="sourcePoint" />
+            <mxPoint x="785" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg16" value="16: display reservation summary &amp; prompt confirmation (y/n)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="910" as="sourcePoint" />
+            <mxPoint x="80" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: alt [Attendee Confirms (y)] vs [Attendee Cancels (n)] -->
+        <mxCell id="frame_alt_confirm" value="alt [userInput == &quot;y&quot; (Confirm)]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=200;height=25;fontSize=11;strokeColor=#b85450;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="930" width="1180" height="395" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg17" value="17: enter &quot;y&quot; (Confirm)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="965" as="sourcePoint" />
+            <mxPoint x="445" y="965" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg18" value="18: paymentMethods() prompt (Card / E-wallet / Bank / Cancel)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="995" as="sourcePoint" />
+            <mxPoint x="80" y="995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: alt [Payment Successful (1/2/3)] vs [Cancelled (4)] -->
+        <mxCell id="frame_alt_pay" value="alt [payment choice in &quot;1&quot;, &quot;2&quot;, &quot;3&quot; (Payment Success)]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=330;height=25;fontSize=11;strokeColor=#9673a6;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="75" y="1015" width="1165" height="255" as="geometry" />
+        </mxCell>
+
+        <mxCell id="msg19" value="19: select &quot;1&quot; (Credit/Debit Card)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="1045" as="sourcePoint" />
+            <mxPoint x="445" y="1045" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg20" value="20: setReservedSeats(), setReservedVipSeats()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1075" as="sourcePoint" />
+            <mxPoint x="785" y="1075" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg21" value="21: attendee.setLoyaltyPoint(updatedPoints)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1105" as="sourcePoint" />
+            <mxPoint x="620" y="1105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg22" value="22: &lt;&lt;create&gt;&gt; new TicketReservation(id, user, e, seats, qty, time, price)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1140" as="sourcePoint" />
+            <mxPoint x="980" y="1140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg23" value="23: &lt;&lt;create&gt;&gt; new DigitalTicket(id, newReservation)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1175" as="sourcePoint" />
+            <mxPoint x="1175" y="1175" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg24" value="24: reservationList.add(newReservation), digitalTicketList.add(newTicket)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1205" as="sourcePoint" />
+            <mxPoint x="620" y="1205" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg25" value="25: print &quot;Thank you for payment! Reservation created successfully.&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1235" as="sourcePoint" />
+            <mxPoint x="80" y="1235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Divider line for pay cancel -->
+        <mxCell id="div_pay_cancel" value="[choice == &quot;4&quot; (Cancel Payment)]" style="line;strokeWidth=1;dashed=1;labelPosition=right;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=#9673a6;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="1245" as="sourcePoint" />
+            <mxPoint x="1240" y="1245" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_pay_cancel" value="print &quot;Reservation cancelled.&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1260" as="sourcePoint" />
+            <mxPoint x="80" y="1260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Divider line for confirm [else: userInput == "n"] -->
+        <mxCell id="div_confirm_else" value="[else: userInput == &quot;n&quot; (Discard)]" style="line;strokeWidth=1;dashed=1;labelPosition=right;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=#b85450;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="1285" as="sourcePoint" />
+            <mxPoint x="1250" y="1285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="msg_confirm_discard" value="print &quot;Reservation cancelled.&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="1310" as="sourcePoint" />
+            <mxPoint x="80" y="1310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="admin-event-management" name="2. Admin Manage Event Parameters Flow">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1150" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title2" value="Sequence Diagram: Admin Managing Event Parameters (with UML alt &amp; loop)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Lifelines -->
+        <mxCell id="adm_actor" value="Admin" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="70" width="80" height="920" as="geometry" />
+        </mxCell>
+
+        <mxCell id="adm_dashboard" value=":UserDashboard" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="220" y="70" width="130" height="920" as="geometry" />
+        </mxCell>
+
+        <mxCell id="adm_eventmgr" value=":EventManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="70" width="130" height="920" as="geometry" />
+        </mxCell>
+
+        <mxCell id="adm_main" value=":Main" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="610" y="70" width="100" height="920" as="geometry" />
+        </mxCell>
+
+        <mxCell id="adm_event" value="eventSelected:Event" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="770" y="70" width="130" height="920" as="geometry" />
+        </mxCell>
+
+        <!-- Messages -->
+        <mxCell id="a_msg1" value="1: select &quot;2&quot; (Update event)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="140" as="sourcePoint" />
+            <mxPoint x="285" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg2" value="2: updateEvent(sc)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="170" as="sourcePoint" />
+            <mxPoint x="485" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg3" value="3: get Main.eventList" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="200" as="sourcePoint" />
+            <mxPoint x="660" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg4" value="4: return eventList" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="660" y="225" as="sourcePoint" />
+            <mxPoint x="485" y="225" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: loop each event for listing -->
+        <mxCell id="a_frame_loop" value="loop [for each Event e in eventList]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=220;height=25;fontSize=11;strokeColor=#6c8ebf;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="440" y="245" width="450" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a_msg5" value="5: listingEventDetails(index)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="280" as="sourcePoint" />
+            <mxPoint x="835" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg6" value="6: display events &amp; prompt event title to update" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="325" as="sourcePoint" />
+            <mxPoint x="90" y="325" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg7" value="7: enter target event title" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="360" as="sourcePoint" />
+            <mxPoint x="485" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg8" value="8: match event &amp; get current details" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="395" as="sourcePoint" />
+            <mxPoint x="835" y="395" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg9" value="9: prompt choice: (1: Event name, 2: Artist/Speaker, 3: Venue, 4: Cancel)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="430" as="sourcePoint" />
+            <mxPoint x="90" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FRAME: alt parameter selection -->
+        <mxCell id="a_frame_alt_choice" value="alt [choice == &quot;1&quot; (Update Event Name)]" style="shape=umlFrame;whiteSpace=wrap;html=1;width=250;height=25;fontSize=11;strokeColor=#d79b00;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="455" width="880" height="465" as="geometry" />
+        </mxCell>
+
+        <!-- Branch 1: Event Name -->
+        <mxCell id="a_msg10_1" value="10a: select &quot;1&quot; &amp; enter new event name" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="490" as="sourcePoint" />
+            <mxPoint x="485" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg13_1" value="11a: setEventName(newName)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="520" as="sourcePoint" />
+            <mxPoint x="835" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg14_1" value="print &quot;Event name has successfully updated!&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="545" as="sourcePoint" />
+            <mxPoint x="90" y="545" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Divider line for Branch 2: Artist/Speaker Name -->
+        <mxCell id="a_div_artist" value="[choice == &quot;2&quot; (Update Artist / Speaker)]" style="line;strokeWidth=1;dashed=1;labelPosition=right;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="565" as="sourcePoint" />
+            <mxPoint x="950" y="565" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg10_2" value="10b: select &quot;2&quot; &amp; enter new artist/speaker name" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="595" as="sourcePoint" />
+            <mxPoint x="485" y="595" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg13_2" value="11b: setArtistName(name) / setSpeakerName(name)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="625" as="sourcePoint" />
+            <mxPoint x="835" y="625" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg14_2" value="print &quot;Artist/Speaker name has successfully updated!&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="650" as="sourcePoint" />
+            <mxPoint x="90" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Divider line for Branch 3: Venue -->
+        <mxCell id="a_div_venue" value="[choice == &quot;3&quot; (Update Venue)]" style="line;strokeWidth=1;dashed=1;labelPosition=right;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="670" as="sourcePoint" />
+            <mxPoint x="950" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg10_3" value="10c: select &quot;3&quot; &amp; enter new venue location" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="700" as="sourcePoint" />
+            <mxPoint x="485" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg13_3" value="11c: setVenue(newVenue)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="730" as="sourcePoint" />
+            <mxPoint x="835" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg14_3" value="print &quot;Venue has successfully updated!&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="755" as="sourcePoint" />
+            <mxPoint x="90" y="755" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Divider line for Branch 4: Cancel -->
+        <mxCell id="a_div_cancel" value="[choice == &quot;4&quot; (Cancel)]" style="line;strokeWidth=1;dashed=1;labelPosition=right;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="775" as="sourcePoint" />
+            <mxPoint x="950" y="775" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg10_4" value="10d: select &quot;4&quot; (Cancel update)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="805" as="sourcePoint" />
+            <mxPoint x="485" y="805" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_msg14_4" value="print &quot;Update cancelled.&quot;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="835" as="sourcePoint" />
+            <mxPoint x="90" y="835" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Return to dashboard -->
+        <mxCell id="a_msg15" value="12: return" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="940" as="sourcePoint" />
+            <mxPoint x="285" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
